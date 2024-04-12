@@ -1,0 +1,59 @@
+CREATE DATABASE foodbank DEFAULT CHARACTER SET utf8;
+GRANT ALL ON foodbank.* TO 'omar'@'localhost' IDENTIFIED BY '123';
+GRANT ALL ON foodbank.* TO 'omar'@'127.0.0.1' IDENTIFIED BY '123';
+USE foodbank;
+
+CREATE TABLE distributor (
+id INT UNSIGNED NOT NULL
+AUTO_INCREMENT,
+name VARCHAR(128), 
+address VARCHAR(128),
+PRIMARY KEY(id)
+);
+
+CREATE TABLE supplier (
+id INT UNSIGNED NOT NULL
+AUTO_INCREMENT,
+name VARCHAR(128), 
+address VARCHAR(128),
+PRIMARY KEY(id)
+);
+
+CREATE TABLE program (
+id INT UNSIGNED NOT NULL
+AUTO_INCREMENT,
+program_name VARCHAR(128), 
+PRIMARY KEY(id)
+);
+
+CREATE TABLE item (
+id INT UNSIGNED NOT NULL
+AUTO_INCREMENT,
+item_name VARCHAR(128), 
+program_id UNSIGNED INT,
+item_cost UNSIGNED float,
+amount UNSIGNED INT,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE donor (
+id INT UNSIGNED NOT NULL
+AUTO_INCREMENT,
+username VARCHAR(128), 
+email VARCHAR(128),
+password VARCHAR(128),
+phone_number VARCHAR(128),
+gender TINYINT,
+birthdate DATE,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE donation_details (
+id INT UNSIGNED NOT NULL
+AUTO_INCREMENT,
+donor_name VARCHAR(128), 
+program_name VARCHAR(128),
+total_cost UNSIGNED float,
+donation_date date,
+PRIMARY KEY(id)
+);
