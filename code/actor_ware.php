@@ -9,7 +9,6 @@ require_once "Item.php";
 <body>Items
 <?php
 
-echo('<table border="1">'."\n");
 echo('<table border="1">
 <thead><tr>
 <th>Program ID</th>
@@ -34,5 +33,5 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
     echo("</td></tr>\n");
 }
 ?>
-</table>
-<a href="addItem.php">Add New</a><br/>
+</table><br/>
+<a href="addItem.php">Add New</a>

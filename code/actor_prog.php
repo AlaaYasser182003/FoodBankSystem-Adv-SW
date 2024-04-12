@@ -9,7 +9,12 @@ require_once "Program.php";
 <body>Programs
 <?php
 
-echo('<table border="1">'."\n");
+echo('<table border="1">
+<thead><tr>
+<th>Program ID</th>
+<th>Name</th>
+<th>Action</th>
+</tr></thead>');
 $stmt = Program::view_all();
 while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
     echo "<tr><td>";
@@ -22,5 +27,5 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
     echo("</td></tr>\n");
 }
 ?>
-</table>
+</table><br/>
 <a href="addProgram.php">Add New</a><br/>
