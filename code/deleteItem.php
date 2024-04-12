@@ -1,8 +1,8 @@
 <?php
 require_once 'Item.php';
-$donation = new Item();
-$donation->setId($_GET['id']);
-$donation->remove();
+$item = new Item();
+$item->setId($_GET['id']);
+$item->remove();
 header("Location: actor_ware.php");
 exit;
 ?>
