@@ -23,6 +23,7 @@ CREATE TABLE program (
 id INT UNSIGNED NOT NULL
 AUTO_INCREMENT,
 program_name VARCHAR(128), 
+description VARCHAR(128), 
 PRIMARY KEY(id)
 );
 
