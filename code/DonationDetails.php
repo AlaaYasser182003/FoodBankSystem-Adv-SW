@@ -20,10 +20,11 @@ class DonationDetails implements imanage {
 
     public function add() {
         global $pdo, $table;
-        $sql = "INSERT INTO {$table} (donor_name, total_cost, program_name, donation_date) 
-        VALUES (:donor, :cost, :program, :date)";
+        $sql = "INSERT INTO {$table} (id, donor_name, total_cost, program_name, donation_date) 
+        VALUES (:id, :donor, :cost, :program, :date)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':donor' => $this->donor_name,
+        'id' => $this->id,
         ':cost' => $this->total_cost,
         ':program' => $this->program_name,
         ':date' => $this->donation_date));

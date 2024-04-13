@@ -3,7 +3,7 @@ require_once "pdo.php";
 require_once "imanage.php";
 
 $table = "donor";
-class Donation implements imanage {
+class Donor implements imanage {
     
     private $username;
     private $birthdate;

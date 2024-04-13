@@ -1,13 +1,9 @@
-<?php
-require_once "pdo.php";
-require_once "DonationDetails.php";
-?>
-
 <html>
 <head>Donation Details</head><br></br>
 
 <body>
 <?php
+require_once "DonationDetails.php";
 $details = new DonationDetails();
 $details->setId($_GET['id']);
 $row = $details->read();

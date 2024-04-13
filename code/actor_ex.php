@@ -24,11 +24,8 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
     echo("</td><td>");
     echo(htmlentities($row['amount']));
     echo("</td><td>");
-    echo('<a href="editDonation.php?id='.$row['id'].'">Edit</a> / ');
-    echo('<a href="deleteDonation.php?id='.$row['id'].'">Delete</a> / ');
     echo('<a href="details.php?id='.$row['id'].'">Details</a>');
     echo("</td></tr>\n");
 }
 ?>
 </table><br/>
-<a href="addDonation.php">Add New</a><br/>

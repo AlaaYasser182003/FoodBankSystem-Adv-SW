@@ -1,5 +1,4 @@
 <?php
-require_once "pdo.php";
 require_once "Distributor.php";
 
 if ( isset($_POST['name']) &&  isset($_POST['address']) ) {

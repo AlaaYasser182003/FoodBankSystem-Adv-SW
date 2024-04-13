@@ -6,18 +6,21 @@ $table = "program";
 class Program implements imanage {
     
     private $program_name;
+    private $description;
     private $id = 0;
 
-    public function __construct($program_name = "") {
+    public function __construct($program_name = "", $description = "") {
         $this->program_name = $program_name;
+        $this->description = $description;
     }
 
     public function add() {
         global $pdo, $table;
-        $sql = "INSERT INTO {$table} (program_name) 
-        VALUES (:program)";
+        $sql = "INSERT INTO {$table} (program_name, description) 
+        VALUES (:program, :description)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':program' => $this->program_name,));
+        $stmt->execute(array(':program' => $this->program_name,
+        ':description' => $this->description));
         $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->id = $row['LAST_INSERT_ID()'];
@@ -35,10 +38,11 @@ class Program implements imanage {
     public function edit() {
         global $pdo, $table;
         $sql = "UPDATE {$table} SET 
-        program_name = :program WHERE id = :id";
+        program_name = :program, description = :description WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $this->id,
-        'program' => $this->program_name]);
+        'program' => $this->program_name,
+        'description' => $this->description]);
     }
 
    public function remove() {
