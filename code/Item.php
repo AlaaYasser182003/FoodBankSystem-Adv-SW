@@ -1,9 +1,9 @@
 <?php
 require_once "pdo.php";
-require_once "imodifiable.php";
+require_once "imanage.php";
 
 $table = "item";
-class Item implements imodifiable {
+class Item implements imanage {
     
     private $id = 0;
     private $program_id;
@@ -44,11 +44,12 @@ class Item implements imodifiable {
 
     public function edit() {
         global $pdo, $table;
-        $sql = "UPDATE {$table} SET item_name = :Iname, item_cost = :cost,
+        $sql = "UPDATE {$table} SET program_id = :program_id, item_name = :Iname, item_cost = :cost,
         amount = :amount  WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute([
             'id' => $this->id,
+            'program_id' => $this->program_id,
             'Iname' => $this->item_name,
             'cost' => $this->item_cost,
             'amount' => $this->amount

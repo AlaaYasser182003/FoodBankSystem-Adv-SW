@@ -6,7 +6,7 @@ if ( isset($_POST['name']) &&  isset($_POST['address']) ) {
     $supp = new Supplier($_POST["name"], $_POST["address"]);
     $supp->setId($_GET["id"]);
     $supp->edit();
-    header("Location: actor_proc.php");
+    header("Location: suppCRUD.php");
     return;
 }
 
@@ -17,26 +17,33 @@ $row = $supp->read();
 $n = htmlentities($row['name']);
 $a = htmlentities($row['address']);
 ?>
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Food Bank</title>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="CRUD.css">
 </head>
 <body>
-<header>
-        <h1>Welcome Procurement Coordinator</h1>
-    </header>
-<p>Edit Supplier</p>
-<form method="post">
-<p>Name:
-<input type="text" name="name" value="<?= $n ?>"></p>
-<p>Address:
-<input type="text" name="address" value="<?= $a ?>"></p>
-<p><input type="submit" value="Update"/>
-<a href="actor_proc.php">Cancel</a></p>
-</form>
-<footer>
-        <p>© 2024 Food Bank</p>
-</footer>
-</body></html>
+
+<style> body{background-color: #329443;}</style>
+
+<div class="container">
+
+
+<div class="admin-object-form-container centered">
+   <form method="post">
+      <h3 class="title">Edit the supplier</h3>
+      <input type="text" class="box" name="name" value="<?php echo $row['name']; ?>" placeholder="enter the supplier name" required>
+      <input type="text" min="0" class="box" name="address" value="<?php echo $row['address']; ?>" placeholder="enter the supplier address" required>
+      <input type="submit" value="Update" name="update_supplier" class="btn">
+      <a href="suppCRUD.php" class="btn">Cancel</a>
+   </form>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,13 +1,12 @@
 <?php
 require_once "Item.php";
 
-if ( isset($_POST['name']) && isset($_POST['program_id'])
-     && isset($_POST['amount']) && isset($_POST['cost']) ) {
+if ( isset($_POST['update_item'])) {
     
-    $item = new Item($_POST["program_id"], $_POST["name"], $_POST["cost"], $_POST["amount"]);
+    $item = new Item($_POST["program_id"], $_POST["name"], $_POST["item_cost"], $_POST["amount"]);
     $item->setId($_GET["id"]);
     $item->edit();
-    header("Location: actor_ware.php");
+    header("Location: itemCRUD.php");
     return;
 }
 
@@ -20,31 +19,35 @@ $a = htmlentities($row['amount']);
 $c = htmlentities($row['item_cost']);
 $program_id = $row['program_id'];
 ?>
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Food Bank</title>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="CRUD.css">
 </head>
 <body>
-<header>
-        <h1>Welcome Warehouse Coordinator</h1>
 
-</header>
-<p>Edit Item</p>
-<form method="post">
-<p>Name:
-<input type="text" name="name" value="<?= $n ?>"></p>
-<p>Amount:
-<input type="number" name="amount" value="<?= $a ?>"></p>
-<p>Cost:
-<input type="number" step = "0.001" name="cost" value="<?= $c ?>"></p>
-<p>Program ID:
-<input type="number" name="program_id" value="<?= $program_id ?>"></p>
-<p><input type="submit" value="Update"/>
-<a href="actor_ware.php">Cancel</a></p>
-</form>
-<footer>
-        <p>© 2024 Food Bank</p>
-</footer>
-</body></html>
+<style> body{background-color: #329443;}</style>
+
+<div class="container">
+
+
+<div class="admin-object-form-container centered">
+   <form method="post">
+      <h3 class="title">Edit the item</h3>
+      <input type="text" class="box" name="name" value="<?php echo $row['item_name']; ?>" placeholder="enter item name">
+      <input type="number" min="0" class="box" name="amount" value="<?php echo $row['amount']; ?>" placeholder="enter amount">
+      <input type="number" class="box" step="0.001" name="item_cost" value="<?php echo $row['item_cost']; ?>" placeholder="enter cost">
+      <input type="number" class="box" name="program_id" value="<?php echo $row['program_id']; ?>" placeholder="enter program id">
+      <input type="submit" value="Update" name="update_item" class="btn">
+      <a href="itemCRUD.php" class="btn">Cancel</a>
+   </form>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,9 +1,9 @@
 <?php
 require_once "pdo.php";
-require_once "imodifiable.php";
+require_once "imanage.php";
 
 $table = "donor";
-class Donor implements imodifiable {
+class Donor implements imanage {
     
     private $username;
     private $birthdate;

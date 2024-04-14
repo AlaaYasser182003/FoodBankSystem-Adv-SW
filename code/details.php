@@ -1,43 +1,42 @@
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Food Bank</title>
-</head>
+<html>
 <body>
-<header>
-        <h1>Welcome Executive Director</h1>
-</header>
-<body>
-<h1>Donation Details</h1>
 <?php
 require_once "DonationDetails.php";
 $details = new DonationDetails();
 $details->setId($_GET['id']);
 $row = $details->read();
-echo('<table border="1">
-<thead><tr>
-<th>ID</th>
-<th>Donor Name</th>
-<th>Program Name</th>
-<th>Total Cost</th>
-<th>Donation Date</th>
-</tr></thead>');
-echo "<tr><td>";
-echo(htmlentities($row['Id']));
-echo("</td><td>");
-echo(htmlentities($row['donor_name']));
-echo("</td><td>");
-echo(htmlentities($row['program_name']));
-echo("</td><td>");
-echo(htmlentities($row['total_cost']));
-echo("</td><td>");
-echo(htmlentities($row['donation_date']));
-echo("</td></tr>\n");
+
 ?>
-</table><br/>
-<a href="actor_ex.php?">Back</a>
-<footer>
-        <p>© 2024 Food Bank</p>
-</footer>
-</body></html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="CRUD.css">
+</head>
+<body>
+
+<style> body{background-color: #329443;}</style>
+
+<div class="container">
+
+
+<div class="admin-object-form-container centered">
+   <form method="post">
+      <h3 class="title">Donation Details</h3>
+      <input type="number" class="box" name="id" value="<?php echo $row['id']; ?>">
+      <input type="text" class="box" name="donor_name" value="<?php echo $row['donor_name']; ?>">
+      <input type="text" class="box" name="program_name" value="<?php echo $row['program_name']; ?>">
+      <input type="number" class="box" name="total_cost" value="<?php echo $row['total_cost']; ?>">
+      <input type="text" class="box" name="donation_date" value="<?php echo $row['donation_date']; ?>">
+      <a href="donationCRUD.php" class="btn">Back</a>
+   </form>
+</div>
+
+</div>
+
+</body>
+</html>

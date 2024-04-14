@@ -20,7 +20,10 @@ session_start();
                     echo('<li><a href="myacc.php">My Account</a></li>');
                     echo('<li><a href="logout.php">Logout</a></li>');
                 }
-                else echo('<li><a href="login.php">Login</a></li>');
+                else {
+                    echo('<li><a href="login.php">Login</a></li>');
+                    echo('<li><a href="dashboard.php">Dashboard</a></li>');
+                }
                 ?>
             </ul>
         </nav>
@@ -30,7 +33,7 @@ session_start();
         <h2>Our Programs</h2>
         <?php
 
-        echo('<table class="zui-table" border="1">
+        echo('<table border="1">
             <thead><tr>
             <th>Program Name</th>
             <th>Description</th>');
