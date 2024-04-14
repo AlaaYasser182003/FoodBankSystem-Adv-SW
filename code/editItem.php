@@ -20,7 +20,17 @@ $a = htmlentities($row['amount']);
 $c = htmlentities($row['item_cost']);
 $program_id = $row['program_id'];
 ?>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Food Bank</title>
+</head>
+<body>
+<header>
+        <h1>Welcome Warehouse Coordinator</h1>
 
+</header>
 <p>Edit Item</p>
 <form method="post">
 <p>Name:
@@ -34,3 +44,7 @@ $program_id = $row['program_id'];
 <p><input type="submit" value="Update"/>
 <a href="actor_ware.php">Cancel</a></p>
 </form>
+<footer>
+        <p>© 2024 Food Bank</p>
+</footer>
+</body></html>

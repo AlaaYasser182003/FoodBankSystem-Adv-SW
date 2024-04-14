@@ -42,41 +42,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="signup.css">
-    <title>Login</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="login.css">
+        <title>Login</title>
+    </head>
 
-<body>
-    <header>
-        <h1>Food Bank</h1>
-    </header>
-    <main>
-    <h2>Login</h2>
-    <?php if ($error): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
-    <?php endif; ?>
-    <form action="login.php" method="POST">
-        <label>Username: </label>
-        <input type="text" id="username" name="username" required>
-        <br><br>
+    <body>
+        <section class="container">
+            <header><h1>Login</h1></header>
+            
+                <?php if ($error): ?>
+                    <p style="color: red;"><?php echo $error; ?></p>
+                <?php endif; ?>
 
-        <label>Password: </label>
-        <input type="password" id="password" name="password" required>
-        <br><br>
+                <form action="login.php" method="POST" class="form">
+                    <div class = "input-box">
+                        <label>Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
 
-        <input type="submit" name="submit" value="Login">
-        <br><br>
+                    <div class = "input-box">
+                        <label>Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
 
-        <p class="Signup-link">First time? <a href="signup.php">Sign Up Now</a></p>
-    </form>
+                    <button>Submit</button>
+                <p class="login-link">First Time? <a href="signup.php">Sign Up</a> <a href="home.php">Cancel</a></p>
+                </form>
 
-    </main>
-    <footer>
-        <p>© 2024 Food Bank</p>
-    </footer>
-</body>
+        </section>
+    </body>
 
 </html>

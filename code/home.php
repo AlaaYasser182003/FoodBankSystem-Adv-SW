@@ -30,7 +30,7 @@ session_start();
         <h2>Our Programs</h2>
         <?php
 
-        echo('<table border="1">
+        echo('<table class="zui-table" border="1">
             <thead><tr>
             <th>Program Name</th>
             <th>Description</th>');

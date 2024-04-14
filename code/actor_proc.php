@@ -3,11 +3,23 @@ require_once "pdo.php";
 require_once "Supplier.php";
 
 ?>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Food Bank</title>
+</head>
+<body>
+<header>
+        <h1>Welcome Procurement Coordinator</h1>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+<h1>Suppliers</h1>
 
-<html>
-<head>Welcome Procurement Coordinator</head><br></br>
-
-<body>Suppliers
 <?php
 
 echo('<table border="1">
@@ -35,7 +47,8 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 <a href="addSupplier.php">Add New</a>
 
 
-<br></br>Distributors
+<br></br>
+<h1>Distributors</h1>
 <?php
 require_once "Distributor.php";
 
@@ -62,3 +75,7 @@ while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
 ?>
 </table><br/>
 <a href="addDist.php">Add New</a>
+<footer>
+        <p>© 2024 Food Bank</p>
+</footer>
+</body></html>

@@ -1,7 +1,15 @@
-<html>
-<head>Donation Details</head><br></br>
-
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Food Bank</title>
+</head>
 <body>
+<header>
+        <h1>Welcome Executive Director</h1>
+</header>
+<body>
+<h1>Donation Details</h1>
 <?php
 require_once "DonationDetails.php";
 $details = new DonationDetails();
@@ -29,3 +37,7 @@ echo("</td></tr>\n");
 ?>
 </table><br/>
 <a href="actor_ex.php?">Back</a>
+<footer>
+        <p>© 2024 Food Bank</p>
+</footer>
+</body></html>
