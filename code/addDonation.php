@@ -32,14 +32,33 @@ $Ddetails->add();
             </ul>
         </nav>
     </header>
-    
     <main>
-    <p>Program Name: <?= $_POST['program_name'] ?></p>
-    <p>Item Name: <?= $item['item_name'] ?></p>
+    <p>Program ID: <?=  $_POST['program_id']?></p>
+    <p>Donor ID: <?= $_SESSION['user_id'] ?></p>
     <p>Amount: <?= $_POST['quantity'] ?></p>
-    <p>Total Cost: $<?= $cost ?></p>
-    <p>Username: <?= $_SESSION['username'] ?></p>
-    <a href="home.php">Return</a>
+    <div>
+      <table border="1">
+         <thead>
+         <tr>
+            <th>Donation ID</th>
+            <th>Donor Name</th>
+            <th>Program Name</th>
+            <th>Item Name</th>
+            <th>Total Cost</th>
+            <th>Date</th>
+         </tr>
+         </thead>
+         <tr>
+            <td><?php echo $Donation->getId();?></td>
+            <td><?php echo $_SESSION['username']; ?></td>
+            <td><?php echo $_POST['program_name']; ?></td>
+            <td><?php echo $item['item_name']; ?></td>
+            <td>$<?php echo $cost; ?></td>
+            <td><?php echo date('y-m-d');?></td>
+        </tr>
+      </table>
+   </div><br/>
+   <a href="home.php">Return</a>
     </main>
     <footer>
         <p>© 2024 Food Bank</p>
