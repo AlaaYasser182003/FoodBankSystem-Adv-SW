@@ -1,8 +1,7 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__), 1));
-require_once (__ROOT__."\Model\DistributorModel.php");
-require_once (__ROOT__."\View\DistributorView.php");
-require_once (__ROOT__."\Model\pdo.php");
+require_once "..\Model\DistributorModel.php";
+require_once "..\View\DistributorView.php";
+require_once "..\Model\pdo.php";
 
 $command = $_GET['cmd'];
 $distView = new DistributorView();

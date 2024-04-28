@@ -1,10 +1,8 @@
 <?php
-define('__ROOT__', dirname(dirname(__FILE__), 1));
-require_once (__ROOT__."\Model\DonationModel.php");
-require_once (__ROOT__."\View\DonationView.php");
-require_once (__ROOT__."\Model\pdo.php");
-//require_once (__ROOT__."\Model\DonorModel.php");
-require "../Model/DonorModel.php";
+require_once "..\Model\DonationModel.php";
+require_once "..\View\DonationView.php";
+require_once "..\Model\pdo.php";
+require_once  "../Model/DonorModel.php";
 
 $command = $_GET['cmd'];
 $donationView = new DonationsView();
