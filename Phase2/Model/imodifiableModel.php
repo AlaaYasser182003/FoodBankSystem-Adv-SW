@@ -3,10 +3,8 @@
 interface ImodifiableModel {
 
     function add();
-    function remove();
+    static function remove($id);
     function edit();
     function read();
     static function view_all();
 }
-
-?>
