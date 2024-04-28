@@ -2,9 +2,9 @@
 require_once "pdo.php";
 require_once "ModifiableAbstModel.php";
 
-$table3 = "donation_details";
 class DonationDetailsModel extends ModifiableAbstModel {    
     
+    const table = "donation_details";
     private $donation_id;
     private $item_id;
     private $Qty;
@@ -18,8 +18,8 @@ class DonationDetailsModel extends ModifiableAbstModel {
     }
 
     public function add() {
-        global $pdo, $table;
-        $sql = "INSERT INTO {$table} (donation_id, item_id, Qty, price) 
+        global $pdo;
+        $sql = "INSERT INTO ".self::table." (donation_id, item_id, Qty, price) 
         VALUES (:donation, :item, :qty, :price)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':donation' => $this->donation_id,
@@ -29,12 +29,12 @@ class DonationDetailsModel extends ModifiableAbstModel {
         $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->id = $row['LAST_INSERT_ID()'];
-        return 0;
+        return 1;
     }
 
     public function read() {
-        global $pdo, $table;
-        $sql = "SELECT * FROM {$table} WHERE id = :id";
+        global $pdo;
+        $sql = "SELECT * FROM ".self::table." WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $this->id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -42,28 +42,28 @@ class DonationDetailsModel extends ModifiableAbstModel {
         $this->item_id = $row['item_id'];
         $this->Qty = $row['Qty'];
         $this->price = $row['price'];
-        return 0;
+        return 1;
     }
 
     public function edit() {
-        global $pdo, $table;
-        $sql = "UPDATE {$table} SET donation_id = :donation, item_id = :item,
+        global $pdo;
+        $sql = "UPDATE ".self::table." SET donation_id = :donation, item_id = :item,
         Qty = :qty, price = :price WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $this->id, 'donation' => $this->donation_id,
         'item' => $this->item_id, 'qty' => $this->Qty, 'price' => $this->price]);
     }
 
-   public function remove() {
-        global $pdo, $table;
-        $sql = "DELETE FROM {$table} WHERE id = :id";
+   public function remove($id) {
+        global $pdo;
+        $sql = "DELETE FROM ".self::table." WHERE id = :id";
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute(['id' => $this->id]);
+        return $stmt->execute(['id' => $id]);
     }
 
     public static function view_all(){
-        global $pdo, $table3;
-        $stmt = $pdo->query("SELECT * FROM {$table3}");
+        global $pdo;
+        $stmt = $pdo->query("SELECT * FROM ".self::table);
         return $stmt;
     }
 }
