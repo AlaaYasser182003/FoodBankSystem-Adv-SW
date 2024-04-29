@@ -20,7 +20,7 @@ class ItemModel extends ModifiableAbstModel {
 
     public function add() {
         global $pdo;
-        $sql = "INSERT INTO" . self::table . "(program_id, item_name, item_cost, amount) 
+        $sql = "INSERT INTO " . self::table . " (program_id, item_name, item_cost, amount) 
         VALUES (:PID, :Iname, :cost, :amount)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':PID' => $this->program_id,
@@ -61,7 +61,7 @@ class ItemModel extends ModifiableAbstModel {
         ]);
     }
 
-   public function remove($id) {
+   public static function remove($id) {
         global $pdo;
         $sql = "DELETE FROM " . self::table . " WHERE id = :id";
         $stmt = $pdo->prepare($sql);
