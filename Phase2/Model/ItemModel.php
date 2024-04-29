@@ -19,7 +19,6 @@ class ItemModel extends ModifiableAbstModel {
     }
 
     public function add() {
-        //
         global $pdo;
         $sql = "INSERT INTO" . self::table . "(program_id, item_name, item_cost, amount) 
         VALUES (:PID, :Iname, :cost, :amount)";
@@ -35,7 +34,6 @@ class ItemModel extends ModifiableAbstModel {
     }
 
     public function read() {
-        //
         global $pdo;
         $sql = "SELECT * FROM " . self::table . " WHERE id = :id";
         $stmt = $pdo->prepare($sql);
@@ -50,9 +48,7 @@ class ItemModel extends ModifiableAbstModel {
     }
 
     public function edit() {
-        //
         global $pdo;
-
         $sql = "UPDATE " . self::table . " SET program_id = :program_id, item_name = :Iname, item_cost = :cost,
         amount = :amount  WHERE id = :id";
         $stmt = $pdo->prepare($sql);
@@ -66,7 +62,6 @@ class ItemModel extends ModifiableAbstModel {
     }
 
    public function remove($id) {
-        //
         global $pdo;
         $sql = "DELETE FROM " . self::table . " WHERE id = :id";
         $stmt = $pdo->prepare($sql);
@@ -74,7 +69,6 @@ class ItemModel extends ModifiableAbstModel {
     } 
 
     public static function view_all(){
-        //
         global $pdo;
         $stmt = $pdo->query("SELECT * FROM " . self::table );
         return $stmt;
