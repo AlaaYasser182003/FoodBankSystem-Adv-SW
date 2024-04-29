@@ -2,12 +2,11 @@
 require_once "pdo.php";
 require_once "ModifiableAbstModel.php";
 
-$tableprogram = "program";
+
 class ProgramModel extends ModifiableAbstModel {
-    
+    const table = "item";
     private $program_name;
     private $description;
-    private $id = 0;
 
     public function __construct($program_name = "", $description = "") {
         $this->program_name = $program_name;
@@ -15,8 +14,8 @@ class ProgramModel extends ModifiableAbstModel {
     }
 
     public function add() {
-        global $pdo, $table;
-        $sql = "INSERT INTO {$table} (program_name, description) 
+        global $pdo;
+        $sql = "INSERT INTO " . self::table . " (program_name, description) 
         VALUES (:program, :description)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':program' => $this->program_name,
@@ -24,20 +23,24 @@ class ProgramModel extends ModifiableAbstModel {
         $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->id = $row['LAST_INSERT_ID()'];
-        return 0;
+        return 1;
     }
 
     public function read() {
-        global $pdo, $table;
-        $sql = "SELECT * FROM {$table} WHERE id = :id";
+        global $pdo;
+        $sql = "SELECT * FROM " . self::table . " WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $this->id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->program_name = $row['program_name'];
+        $this->description = $row['description'];
+        return 1;
     }
 
     public function edit() {
-        global $pdo, $table;
-        $sql = "UPDATE {$table} SET 
+        global $pdo;
+        $sql = "UPDATE " . self::table . " SET 
         program_name = :program, description = :description WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $this->id,
@@ -45,27 +48,19 @@ class ProgramModel extends ModifiableAbstModel {
         'description' => $this->description]);
     }
 
-   public function remove() {
-        global $pdo, $table;
-        $sql = "DELETE FROM {$table} WHERE id = :id";
+   public function remove($id) {
+        global $pdo;
+        $sql = "DELETE FROM " . self::table . " WHERE id = :id";
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute(['id' => $this->id]);
+        return $stmt->execute(['id' => $id]);
     }
 
     public static function view_all(){
-        global $pdo, $table;
-        $stmt = $pdo->query("SELECT * FROM {$table}");
+        global $pdo;
+        $stmt = $pdo->query("SELECT * FROM " . self::table);
         return $stmt;
     }
-    public function getById($ID){
-        global $pdo, $tableprogram;
-        $sql = "SELECT * FROM {$tableprogram} WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['id' => $ID]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->program_name = $row['program_name'];
-        $this->description = $row['description'];
-    }
+    
     public function getProgramName(){
         return $this->program_name;
     }
