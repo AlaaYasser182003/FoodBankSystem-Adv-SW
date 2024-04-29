@@ -55,7 +55,7 @@ class DonationModel extends ModifiableAbstModel {
         ]);
     }
 
-    public function remove($id) {
+    public static function remove($id) {
         global $pdo, $table;
         $sql = "DELETE FROM ".self::table." WHERE id = :id";
         $stmt = $pdo->prepare($sql);

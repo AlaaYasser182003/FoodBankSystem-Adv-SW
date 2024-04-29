@@ -54,7 +54,7 @@ class DonationDetailsModel extends ModifiableAbstModel {
         'item' => $this->item_id, 'qty' => $this->Qty, 'price' => $this->price]);
     }
 
-   public function remove($id) {
+   public static function remove($id) {
         global $pdo;
         $sql = "DELETE FROM ".self::table." WHERE id = :id";
         $stmt = $pdo->prepare($sql);

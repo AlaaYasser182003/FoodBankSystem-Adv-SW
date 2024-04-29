@@ -68,7 +68,7 @@ class DonorModel extends ModifiableAbstModel {
         'gender' => $this->gender]);
     }    
 
-   public function remove($id) {
+   public static function remove($id) {
         global $pdo;
         $sql = "DELETE FROM ".self::table." WHERE id = :id";
         $stmt = $pdo->prepare($sql);
