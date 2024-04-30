@@ -45,7 +45,7 @@ class DonationsView {
             <tr>
                 <td>'. $row['id'].'</td>
                 <td>'.$username.'</td>
-                <td>'. $row['total_cost'].'</td>
+                <td>$'. $row['total_cost'].'</td>
                 <td>'. $row['donation_date'].'</td>
                 <td>
                 <a href="DonationDetailsController.php?cmd=viewDetails&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Details </a>

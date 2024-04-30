@@ -51,8 +51,8 @@ class DonationDetailsView {
                 <td>'.$itemName.'</td>
                 <td>'.$programName.'</td>
                 <td>'.$row['Qty'].'</td>
-                <td>'.$row['price'].'</td>
-                <td>'.$row['Qty']*$row['price'].'</td>
+                <td>$'.$row['price'].'</td>
+                <td>$'.$row['Qty']*$row['price'].'</td>
         </tr>');
     }
 }
