@@ -61,9 +61,17 @@ class DonationDetailsModel extends ModifiableAbstModel {
         return $stmt->execute(['id' => $id]);
     }
 
+    public static function view_all_id($id){
+        global $pdo;
+        $sql = "SELECT * FROM ".self::table." WHERE donation_id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function view_all(){
         global $pdo;
         $stmt = $pdo->query("SELECT * FROM ".self::table);
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

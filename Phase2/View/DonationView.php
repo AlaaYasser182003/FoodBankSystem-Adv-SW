@@ -1,9 +1,5 @@
 <?php
-/*define('__ROOT__', dirname(dirname(__FILE__), 1));
-require_once (__ROOT__."\Model\DonationModel.php");
-require_once (__ROOT__."\Model\pdo.php");*/
 include_once "../Model/DonationModel.php";
-include_once "../Model/pdo.php";
 class DonationsView {
     function ShowDonationsTable() {
         
@@ -23,7 +19,7 @@ class DonationsView {
                 <h1>Donation Database</h1>
                 <nav>
                     <ul>
-                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="../View/dashboard.php">Dashboard</a></li>
                     </ul>
                 </nav>
         </header>
@@ -34,7 +30,6 @@ class DonationsView {
                     <thead>
                     <tr>
                         <th>Donation ID</th>
-                        <th>Donor ID</th>
                         <th>Donor Name</th>
                         <th>Amount Donated</th>
                         <th>Donation Date</th>
@@ -44,17 +39,16 @@ class DonationsView {
         ');
     }
 
-    function ShowDonationsRows($row, $donorModel) {
+    function ShowDonationsRows($row, $username) {
 
         echo('
             <tr>
                 <td>'. $row['id'].'</td>
-                <td>'. $row['donor_id'].'</td>
-                <td>'.$donorModel->getUserName().'</td>
+                <td>'.$username.'</td>
                 <td>'. $row['total_cost'].'</td>
                 <td>'. $row['donation_date'].'</td>
                 <td>
-                <a href="DonationDetailsController.php?id='.$row['id'].'&cmd2=viewDetails" class="btn"> <i class="fas fa-edit"></i> Details </a>
+                <a href="DonationDetailsController.php?cmd=viewDetails&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Details </a>
             </td>
         </tr>');
     }

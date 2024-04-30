@@ -30,7 +30,7 @@
     <div class="row">
         <div class="role">
             <img src="https://media.compliancesigns.com/cdn-cgi/image/width=526,format=auto,quality=90/media/catalog/product/i/n/information-sign-nhe-32371_1000.gif" alt="Role 4">
-            <a href="donationCRUD.php">Executive Director</a>
+            <a href="..\Controller\DonationController.php?cmd=viewAll">Executive Director</a>
         </div>
         <div class="role">
             <img src="https://i.pinimg.com/564x/74/d7/b0/74d7b05c3476e062ca7c26452ffb22cb.jpg" alt="Role 5">

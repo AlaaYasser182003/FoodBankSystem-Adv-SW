@@ -1,11 +1,10 @@
 <?php
 require_once "..\Model\DonationDetailsModel.php";
 require_once "..\View\DonationDetailsView.php";
-require_once "..\Model\pdo.php";
 require_once "../Model/ProgramModel.php";
 require_once "../Model/ItemModel.php";
 
-$command = $_GET['cmd2'];
+$command = $_GET['cmd'];
 $donationkey = $_GET['id'];
 $donationDetailsView = new DonationDetailsView();
 $donationDetailsModel = new DonationDetailsModel();
@@ -14,15 +13,13 @@ $itemModel = new ItemModel();
 
 if ($command == 'viewDetails') {
     $donationDetailsView->ShowDonationDetailsTable();
-    $stmt = DonationDetailsModel::view_all();
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    $stmt = DonationDetailsModel::view_all_id($donationkey);
+    foreach($stmt as $row)
     {
-        if($row['donation_id'] == $donationkey)
-        {
         $itemModel->getById($row['item_id']);
         $programModel->getById($itemModel->getProgramID());
-        $donationDetailsView->ShowDonationDetailsRows($row, $itemModel, $programModel);
-        }
+        $donationDetailsView->ShowDonationDetailsRows($row, $itemModel->getItemName(), $programModel->getProgramName());
+    
     }    
 }
 if ($command == 'add') {

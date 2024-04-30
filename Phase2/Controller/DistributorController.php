@@ -1,7 +1,6 @@
 <?php
 require_once "..\Model\DistributorModel.php";
 require_once "..\View\DistributorView.php";
-require_once "..\Model\pdo.php";
 
 $command = $_GET['cmd'];
 $distView = new DistributorView();
@@ -9,7 +8,7 @@ $distView = new DistributorView();
 if ($command == 'viewAll') {
     $distView->ShowDistributorsTable();
     $stmt = DistributorModel::view_all();
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    foreach($stmt as $row)
         $distView->ShowDistributorsRows($row);
 }
 

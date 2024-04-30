@@ -1,9 +1,5 @@
 <?php
-/*define('__ROOT__', dirname(dirname(__FILE__), 1));
-require_once (__ROOT__."\Model\DonationModel.php");
-require_once (__ROOT__."\Model\pdo.php");*/
 include_once "../Model/DonationDetailsModel.php";
-include_once "../Model/pdo.php";
 class DonationDetailsView {
     function ShowDonationDetailsTable() {
         
@@ -23,7 +19,8 @@ class DonationDetailsView {
                 <h1>Donation Database</h1>
                 <nav>
                     <ul>
-                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="../View/dashboard.php">Dashboard</a></li>
+                        <li><a href="../Controller/DonationController.php?cmd=viewAll">Back</a></li>
                     </ul>
                 </nav>
         </header>
@@ -40,26 +37,22 @@ class DonationDetailsView {
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Total</th>
-                        <th>action</th>
                     </tr>
                     </thead>
         ');
     }
 
-    function ShowDonationDetailsRows($row, $itemModel, $programModel) {
+    function ShowDonationDetailsRows($row, $itemName, $programName) {
 
         echo('
             <tr>
                 <td>'. $row['donation_id'].'</td>
                 <td>'. $row['item_id'].'</td>
-                <td>'.$itemModel->getItemName().'</td>
-                <td>'.$programModel->getProgramName().'</td>
+                <td>'.$itemName.'</td>
+                <td>'.$programName.'</td>
                 <td>'.$row['Qty'].'</td>
                 <td>'.$row['price'].'</td>
                 <td>'.$row['Qty']*$row['price'].'</td>
-                <td>
-                <a href="DonationController.php?cmd=viewAll" class="btn"> <i class="fas fa-edit"></i> Back </a>
-            </td>
         </tr>');
     }
 }

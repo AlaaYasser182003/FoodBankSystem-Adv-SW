@@ -4,7 +4,7 @@ require_once "ModifiableAbstModel.php";
 
 
 class ProgramModel extends ModifiableAbstModel {
-    const table = "item";
+    const table = "program";
     private $program_name;
     private $description;
 
@@ -58,7 +58,7 @@ class ProgramModel extends ModifiableAbstModel {
     public static function view_all(){
         global $pdo;
         $stmt = $pdo->query("SELECT * FROM " . self::table);
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function getProgramName(){
