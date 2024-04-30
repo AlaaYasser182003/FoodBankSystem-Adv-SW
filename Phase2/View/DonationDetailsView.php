@@ -5,7 +5,8 @@ require_once "../Model/ItemModel.php";
 
 class DonationDetailsView extends ViewAbst {
     function ShowDonationDetailsTable($rows) {
-        
+        $programModel = new ProgramModel();
+        $itemModel = new ItemModel();  
         echo('
         <!DOCTYPE html>
         <html lang="en">
@@ -44,8 +45,6 @@ class DonationDetailsView extends ViewAbst {
                     </thead>
         ');
 
-        $programModel = new ProgramModel();
-        $itemModel = new ItemModel();        
         foreach($rows as $row) {
             $itemModel->getById($row['item_id']);
             $programModel->getById($itemModel->getProgramID());

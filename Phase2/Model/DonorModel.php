@@ -1,8 +1,9 @@
 <?php
 require_once "pdo.php";
 require_once "ModifiableAbstModel.php";
+require_once "IVerifiable.php";
 
-class DonorModel extends ModifiableAbstModel {
+class DonorModel extends ModifiableAbstModel implements IVerifiable {
     
     const table = "donor";
     private $username;
@@ -80,6 +81,33 @@ class DonorModel extends ModifiableAbstModel {
         $stmt = $pdo->query("SELECT * FROM ".self::table);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function login($Username, $Password) {
+        global $pdo;
+        try {
+            $stmt = $pdo->prepare('SELECT * FROM donor WHERE username = :username');
+            $stmt->execute(['username' => $Username]);
+            
+            $donor = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($donor) {
+                $pass = $donor['password'];
+                if ($pass === $Password) {
+                    $_SESSION['user_id'] = $donor['id'];
+                    $_SESSION['username'] = $donor['username'];
+                    return 1;
+                } 
+                else
+                    $_SESSION['error'] = 'Invalid password.';
+            } 
+            else
+                $_SESSION['error'] = 'User not found.';
+        } 
+        catch (PDOException $e) {
+            $_SESSION['error'] = 'Database error: ' . $e->getMessage();
+        }
+        return 0;
+    }
+
 
     public function getUserName(){
         return $this->username;

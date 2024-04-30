@@ -24,7 +24,7 @@
         </div>
         <div class="role">
             <img src="https://www.rmmagazine.com/images/default-source/magazineimages/2022/6/managing-procurement-risk.jpg?sfvrsn=620674f4_1" alt="Role 3">
-            <a href="supp_dist.php">Procurement Coordinator</a>
+            <a href="supp_dist.htm">Procurement Coordinator</a>
         </div>
     </div>
     <div class="row">
@@ -34,7 +34,7 @@
         </div>
         <div class="role">
             <img src="https://i.pinimg.com/564x/74/d7/b0/74d7b05c3476e062ca7c26452ffb22cb.jpg" alt="Role 5">
-            <a href="..\Controller\HomeController.php?cmd=home">Donor</a>
+            <a href="..\Controller\HomeController.php">Donor</a>
         </div>
     </div>
 

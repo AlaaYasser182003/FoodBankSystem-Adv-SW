@@ -2,7 +2,7 @@
 require_once "ViewAbst.php";
 
 class HomeView extends ViewAbst {
-    function ShowHome($logged, $rows) {
+    function ShowHome($logged, $rows, $username = null) {
         echo('<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -31,7 +31,11 @@ class HomeView extends ViewAbst {
                   </ul>
                 </nav>
             </header>
-            <div class="container">
+            <div class="container">');
+        if ($logged) {
+            echo('<h1>Welcome User: '.$username.'</h1><br/>');
+        }
+        echo('
             <div class="object-display">
                 <table class="object-display-table">
                     <thead><tr>
@@ -53,7 +57,7 @@ class HomeView extends ViewAbst {
         }
     }
 
-    function ShowLogin(){
+    function ShowLogin($error){
         echo('
         <!DOCTYPE html>
         <html>
@@ -65,8 +69,11 @@ class HomeView extends ViewAbst {
             </head>
             <body>
                 <section class="container">
-                    <header><h1>Login</h1></header>
-                        <form action="..\Controller\HomeController.php" method="POST" class="form">
+                    <header><h1>Login</h1></header>');
+                    if ($error != null)
+                        echo('<p style="color: red;">'.$error.'</p>');
+                    echo('
+                            <form action="..\Controller\HomeController.php" method="POST" class="form">
                             <div class = "input-box">
                                 <label>Username:</label>
                                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -80,7 +87,7 @@ class HomeView extends ViewAbst {
                             <button>Submit</button>
                         <p class="login-link">First Time?
                         <a href="..\Controller\DonorController.php?cmd=signup">Sign Up</a>
-                        <a href="..\Controller\HomeController.php?cmd=home">Cancel</a></p>
+                        <a href="..\Controller\HomeController.php">Cancel</a></p>
                         </form>
                 </section>
             </body>
