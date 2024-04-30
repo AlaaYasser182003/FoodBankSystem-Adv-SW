@@ -2,7 +2,7 @@
 require_once "ViewAbst.php";
 
 class DistributorView extends ViewAbst {
-    function ShowDistributorsTable() {
+    function ShowDistributorsTable($rows) {
         
         echo('<!DOCTYPE html>
             <html lang="en">
@@ -47,16 +47,14 @@ class DistributorView extends ViewAbst {
                         <th>Action</th>
                     </tr>
                     </thead>');
-    }
-
-    function ShowDistributorsRows($row) {
-        echo('<tr>
+        foreach($rows as $row)
+            echo('<tr>
             <td>'.$row['id'].'</td>
             <td>'.$row['name'].'</td>
             <td>'.$row['address'].'</td>
             <td>
-               <a href="DistributorController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
-               <a href="DistributorController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
+            <a href="DistributorController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
+            <a href="DistributorController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
             </td>
         </tr>');
     }

@@ -6,10 +6,8 @@ $command = $_GET['cmd'];
 $distView = new DistributorView();
 
 if ($command == 'viewAll') {
-    $distView->ShowDistributorsTable();
     $stmt = DistributorModel::view_all();
-    foreach($stmt as $row)
-        $distView->ShowDistributorsRows($row);
+    $distView->ShowDistributorsTable($stmt);
 }
 
 else if ($command == 'edit') {

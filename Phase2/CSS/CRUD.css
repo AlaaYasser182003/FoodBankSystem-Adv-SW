@@ -40,6 +40,12 @@ html{
    overflow-x: hidden;
 }
 
+li{
+   display: inline;
+   font-size: 1.4rem;
+   margin-right: 13px;
+}
+
 .btn{
    display: block;
    width: 100%;

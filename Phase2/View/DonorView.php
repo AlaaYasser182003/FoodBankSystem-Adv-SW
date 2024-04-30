@@ -1,8 +1,9 @@
 <?php
 require_once "ViewAbst.php";
+require_once "..\Model\DonorModel.php";
 
 class DonorView extends ViewAbst{
-    function ShowDonorsTable() {
+    function ShowDonorsTable($rows) {
         
         echo('<!DOCTYPE html>
         <html lang="en">
@@ -19,7 +20,7 @@ class DonorView extends ViewAbst{
                 <h1>Donor Database</h1>
                 <nav>
                     <ul>
-                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="..\View\dashboard.php">Dashboard</a></li>
                     </ul>
                 </nav>
         </header>
@@ -31,24 +32,25 @@ class DonorView extends ViewAbst{
                     <tr>
                         <th>Donor ID</th>
                         <th>User Name</th>
-                        <th>Birth Date</th>
+                        <th>Birthdate</th>
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Gender</th>
                     </tr>
                     </thead>
         ');
-    }
 
-    function ShowDonorRows($row) {
-        echo('<tr>
-                <td>'. $row['id'].'</td>
-                <td>'.$row['username'].'</td>
-                <td>'.$row['birthdate'].'</td>
-                <td>'.$row['email'].'</td>
-                <td>'.$row['phone_number'].'</td>
-                <td>'.($row['gender'] == 0)?"Male":"Female".'</td>
-        </tr>');
+        foreach($rows as $row)
+            echo('
+                <tr>
+                    <td>'.$row['id'].'</td>
+                    <td>'.$row['username'].'</td>
+                    <td>'.$row['birthdate'].'</td>
+                    <td>'.$row['email'].'</td>
+                    <td>'.$row['phone_number'].'</td>
+                    <td>'.( ($row['gender'] == 0)?"Male":"Female" ).'</td>
+                </tr>
+            ');
     }
 
     function AddDonor() {
@@ -108,7 +110,8 @@ class DonorView extends ViewAbst{
                         </div>
                         
                         <button>Submit</button>
-                        <p class="login-link">Already have an account? <a href="login.php">Login</a></p>
+                        <p class="login-link">Already have an account?
+                        <a href="..\Controller\DonorController.php?cmd=login">Login</a></p>
                     </form>
                 </section>
             </body>
@@ -119,7 +122,7 @@ class DonorView extends ViewAbst{
         echo('<html lang="en"><head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="index.css">
+                <link rel="stylesheet" href="..\CSS\index.css">
                 <title>Food Bank</title>
             </head>
             <body>
@@ -127,8 +130,7 @@ class DonorView extends ViewAbst{
                     <h1>Food Bank</h1>
                     <nav>
                         <ul>
-                            <li><a href="home.php">Home</a></li>
-                            <li><a href="myacc.php">My Account</a></li>
+                            <li><a href="..\Control\DonorController.php?cmd=home">Home</a></li>
                         </ul>
                     </nav>
                 </header>
@@ -153,7 +155,7 @@ class DonorView extends ViewAbst{
                     <br><br>
             
                     <label>Phone Number: </label>
-                    <input type="text" id="phone" name="phone" value="'.$donor->getPhone_number().'">
+                    <input type="text" id="phone" name="phone" value="'.$donor->getPhoneNumber().'">
                     <br><br>
                     
                     <label>Gender: </label>

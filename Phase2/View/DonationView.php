@@ -1,8 +1,9 @@
 <?php
-include_once "../Model/DonationModel.php";
-class DonationsView {
-    function ShowDonationsTable() {
-        
+require_once "ViewAbst.php";
+require_once  "../Model/DonorModel.php";
+
+class DonationsView extends ViewAbst{
+    function ShowDonationsTable($rows) {
         echo('
         <!DOCTYPE html>
         <html lang="en">
@@ -37,19 +38,20 @@ class DonationsView {
                     </tr>
                     </thead>
         ');
-    }
-
-    function ShowDonationsRows($row, $username) {
-
-        echo('
+        
+        $donorModel = new DonorModel();
+        foreach($rows as $row) {
+            $donorModel->getById($row['donor_id']);
+            echo('
             <tr>
                 <td>'. $row['id'].'</td>
-                <td>'.$username.'</td>
+                <td>'.$donorModel->getUserName().'</td>
                 <td>$'. $row['total_cost'].'</td>
                 <td>'. $row['donation_date'].'</td>
                 <td>
                 <a href="DonationDetailsController.php?cmd=viewDetails&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Details </a>
             </td>
-        </tr>');
+            </tr>');
+        }
     }
 }

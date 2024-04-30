@@ -1,7 +1,10 @@
 <?php
-include_once "../Model/DonationDetailsModel.php";
-class DonationDetailsView {
-    function ShowDonationDetailsTable() {
+require_once "ViewAbst.php";
+require_once "../Model/ProgramModel.php";
+require_once "../Model/ItemModel.php";
+
+class DonationDetailsView extends ViewAbst {
+    function ShowDonationDetailsTable($rows) {
         
         echo('
         <!DOCTYPE html>
@@ -40,19 +43,22 @@ class DonationDetailsView {
                     </tr>
                     </thead>
         ');
-    }
 
-    function ShowDonationDetailsRows($row, $itemName, $programName) {
-
-        echo('
+        $programModel = new ProgramModel();
+        $itemModel = new ItemModel();        
+        foreach($rows as $row) {
+            $itemModel->getById($row['item_id']);
+            $programModel->getById($itemModel->getProgramID());
+            echo('
             <tr>
                 <td>'. $row['donation_id'].'</td>
                 <td>'. $row['item_id'].'</td>
-                <td>'.$itemName.'</td>
-                <td>'.$programName.'</td>
+                <td>'.$itemModel->getItemName().'</td>
+                <td>'.$programModel->getProgramName().'</td>
                 <td>'.$row['Qty'].'</td>
                 <td>$'.$row['price'].'</td>
                 <td>$'.$row['Qty']*$row['price'].'</td>
-        </tr>');
+            </tr>');
+        }
     }
 }

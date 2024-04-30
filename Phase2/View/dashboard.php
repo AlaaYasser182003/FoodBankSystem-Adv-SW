@@ -34,7 +34,7 @@
         </div>
         <div class="role">
             <img src="https://i.pinimg.com/564x/74/d7/b0/74d7b05c3476e062ca7c26452ffb22cb.jpg" alt="Role 5">
-            <a href="login.php">Donor</a>
+            <a href="..\Controller\HomeController.php?cmd=home">Donor</a>
         </div>
     </div>
 
