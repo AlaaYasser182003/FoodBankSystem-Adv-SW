@@ -41,7 +41,15 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
         $sql = "SELECT * FROM ".self::table." WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $this->id]);
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->username = $row['username'];
+        $this->birthdate = $row['birthdate'];
+        $this->email = $row['email'];
+        $this->password = $row['password'];
+        $this->phone_number = $row['phone_number'];
+        $this->gender = $row['gender'];
+        return 1;
+    
     }
 
     public function edit() {
@@ -87,6 +95,34 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
          else return false;
 
     }*/
+    static function login($Username, $Password){
+        global $pdo;
+        try {
+            $stmt = $pdo->prepare('SELECT * FROM donor WHERE username = :username');
+            $stmt->execute(['username' => $Username]);
+            
+            $donor = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($donor) {
+                $pass = $donor['password'];
+                if ($pass === $Password) {
+                    $_SESSION['user_id'] = $donor['id'];
+                    $_SESSION['username'] = $donor['username'];
+                    return 1;
+                } 
+                else
+                    $_SESSION['error'] = 'Invalid password.';
+            } 
+            else
+                $_SESSION['error'] = 'User not found.';
+        } 
+        catch (PDOException $e) {
+            $_SESSION['error'] = 'Database error: ' . $e->getMessage();
+        }
+        return 0;
+    }
+    
+
+    
     public function getUserName(){
         return $this->username;
     }
@@ -129,9 +165,6 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
     public function getPassword()
     {
         return $this->password;
-    }
-    static function login($Username, $Password){
-        
     }
 
 }
