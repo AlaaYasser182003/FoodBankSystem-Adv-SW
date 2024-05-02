@@ -144,7 +144,7 @@ class DonorView extends ViewAbst{
                     <h2>My Account</h2>
                     <form action="editDonor.php" method="post">
                     <label>Username: </label>
-                    <input type="text" id="username" name="username" value="'.$donor->username.'">
+                    <input type="text" id="username" name="username" value="'.$donor->getUserName().'">
                     <br><br>
             
                     <label>Password: </label>
@@ -152,18 +152,18 @@ class DonorView extends ViewAbst{
                     <br><br>
             
                     <label>Birthdate: </label>
-                    <input type="date" id="birthdate" name="birthdate" value="'.$donor->birthdate.'">
+                    <input type="date" id="birthdate" name="birthdate" value="'.$donor->getBirthdate().'">
                     <br><br>
             
                     <label>Email: </label>
-                    <input type="text" id="email" name="email" value="'.$donor->email.'">
+                    <input type="text" id="email" name="email" value="'.$donor->getEmail().'">
                     <br><br>
             
                     <label>Phone Number: </label>
-                    <input type="text" id="phone" name="phone" value="'.$donor->phone_number.'">
+                    <input type="text" id="phone" name="phone" value="'.$donor->getPhoneNumber().'">
                     <br><br>
                     
-                    <label>Gender:  '.$donor->gender.' </label>
+                    <label>Gender:  '.$donor->getGender().' </label>
                     <br><br>
             
                     <input type="submit" value="Update">
