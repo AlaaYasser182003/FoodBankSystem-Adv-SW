@@ -20,9 +20,6 @@ class DistributorModel extends ModifiableAbstModel {
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':name' => $this->name,
         'address' => $this->address ));
-        $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->id = $row['LAST_INSERT_ID()'];
         return 1;
     }
 

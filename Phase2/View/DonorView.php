@@ -3,6 +3,76 @@ require_once "ViewAbst.php";
 require_once "..\Model\DonorModel.php";
 
 class DonorView extends ViewAbst{
+    function signup($error = null){
+        echo('<!DOCTYPE html>
+        <html>
+        
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="..\CSS\signup.css">
+                <title>Sign Up</title>
+            </head>
+        
+            <body>
+                <section class="container">
+                    <header><h1>Registration Form</h1></header>
+                    <form action="..\Controller\DonorController.php?cmd=signup" method="post" class="form">
+                        <div class = "input-box">
+                            <label>Username:</label>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+        
+                        <div class = "input-box">
+                            <label>Password:</label>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+        
+                        <div class = "input-box">
+                            <label>Email Address:</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                        </div>   
+        
+                        <div class="column">
+                            <div class = "input-box">
+                                <label>Phone Number:</label>
+                                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+                            </div> 
+        
+                            <div class = "input-box">
+                                <label>Birth Date:</label>
+                                <input type="date" id="birthdate" name="birthdate" required>
+                            </div> 
+                        </div>
+        
+                        <div class="gender-box">
+                            <h3>Gender</h3>
+                            <div class="gender-option">
+                                <div class="gender">
+                                    <input type="radio" id="male" name="gender" value="0" required/>
+                                    <label for="check">Male</label>
+                                </div> 
+                                <div class="gender">
+                                    <input type="radio" id="female" name="gender" value="1" required/>
+                                    <label for="check">Female</label>
+                                </div> 
+                            </div>    
+                        </div>
+                        
+                        <button>Submit</button>
+                        <p class="login-link">Already have an account? <a href="../Controller/HomeController.php?cmd=login">Login</a></p>');
+                        if($error !== null){
+                           echo('<p style="color: red;">' . $error . '</p>');
+                        }
+
+                        echo ('
+                    </form>
+                </section>
+            </body>
+        </html>
+        ');
+    }
     function ShowDonorsTable($rows) {
         
         echo('<!DOCTYPE html>
@@ -53,71 +123,6 @@ class DonorView extends ViewAbst{
             ');
     }
 
-    function AddDonor() {
-        echo('<!DOCTYPE html>
-        <html>
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="..\CSS\signup.css">
-                <title>Sign Up</title>
-            </head>
-        
-            <body>
-                <section class="container">
-                    <header><h1>Registration Form</h1></header>
-                    <form action="DonorController.php?cmd=add" method="post" class="form">
-                        <div class = "input-box">
-                            <label>Username:</label>
-                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                        </div>
-        
-                        <div class = "input-box">
-                            <label>Password:</label>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                        </div>
-        
-                        <div class = "input-box">
-                            <label>Email Address:</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
-                        </div>   
-        
-                        <div class="column">
-                            <div class = "input-box">
-                                <label>Phone Number:</label>
-                                <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
-                            </div> 
-        
-                            <div class = "input-box">
-                                <label>Birth Date:</label>
-                                <input type="date" id="birthdate" name="birthdate" required>
-                            </div> 
-                        </div>
-        
-                        <div class="gender-box">
-                            <h3>Gender</h3>
-                            <div class="gender-option">
-                                <div class="gender">
-                                    <input type="radio" id="male" name="gender" value="0" required/>
-                                    <label for="check">Male</label>
-                                </div> 
-                                <div class="gender">
-                                    <input type="radio" id="female" name="gender" value="1" required/>
-                                    <label for="check">Female</label>
-                                </div> 
-                            </div>    
-                        </div>
-                        
-                        <button>Submit</button>
-                        <p class="login-link">Already have an account?
-                        <a href="..\Controller\DonorController.php?cmd=login">Login</a></p>
-                    </form>
-                </section>
-            </body>
-        </html>');
-    }
-
     function ShowDonorDetails($donor) {
         echo('<html lang="en"><head>
                 <meta charset="UTF-8">
@@ -139,7 +144,7 @@ class DonorView extends ViewAbst{
                     <h2>My Account</h2>
                     <form action="editDonor.php" method="post">
                     <label>Username: </label>
-                    <input type="text" id="username" name="username" value="'.$donor->getId().'">
+                    <input type="text" id="username" name="username" value="'.$donor->username.'">
                     <br><br>
             
                     <label>Password: </label>
@@ -147,28 +152,24 @@ class DonorView extends ViewAbst{
                     <br><br>
             
                     <label>Birthdate: </label>
-                    <input type="date" id="birthdate" name="birthdate" value="'.$donor->getBirthdate().'">
+                    <input type="date" id="birthdate" name="birthdate" value="'.$donor->birthdate.'">
                     <br><br>
             
                     <label>Email: </label>
-                    <input type="text" id="email" name="email" value="'.$donor->getEmail().'">
+                    <input type="text" id="email" name="email" value="'.$donor->email.'">
                     <br><br>
             
                     <label>Phone Number: </label>
-                    <input type="text" id="phone" name="phone" value="'.$donor->getPhoneNumber().'">
+                    <input type="text" id="phone" name="phone" value="'.$donor->phone_number.'">
                     <br><br>
                     
-                    <label>Gender: </label>
-                    <input type="radio" id="male" name="gender" value="0" required>
-                    <label for="male">Male</label>
-                    <input type="radio" id="female" name="gender" value="1" required>
-                    <label for="female">Female</label>
+                    <label>Gender:  '.$donor->gender.' </label>
                     <br><br>
             
                     <input type="submit" value="Update">
                     <br><br>
                 </form>
-                <p class="logout-link"><a href="logout.php">Logout</a></p>
+                <p class="logout-link"><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></p>
                 </main>
                 <footer>
                     <p>© 2024 Food Bank</p>
@@ -176,5 +177,8 @@ class DonorView extends ViewAbst{
             </body>
         </html>');
     }
+    function ShowMyDonations(){}
+
+   
 
 }

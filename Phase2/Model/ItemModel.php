@@ -27,9 +27,6 @@ class ItemModel extends ModifiableAbstModel {
         ':Iname' => $this->item_name,
         ':cost' => $this->item_cost,
         'amount' => $this->amount ));
-        $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->id = $row['LAST_INSERT_ID()'];
         return 1;
     }
 
@@ -79,6 +76,14 @@ class ItemModel extends ModifiableAbstModel {
     }
     public function getProgramID(){
         return $this->program_id;
+    }
+    
+    public function getCost(){
+        return $this->item_cost;
+    }
+    
+    public function getAmount(){
+        return $this->amount;
     }
 }
 ?>

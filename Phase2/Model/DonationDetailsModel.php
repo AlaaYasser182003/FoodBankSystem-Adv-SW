@@ -26,9 +26,6 @@ class DonationDetailsModel extends ModifiableAbstModel {
         ':item_id' => $this->item_id,
         ':qty' => $this->Qty,
         ':price' => $this->price));
-        $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->id = $row['LAST_INSERT_ID()'];
         return 1;
     }
 

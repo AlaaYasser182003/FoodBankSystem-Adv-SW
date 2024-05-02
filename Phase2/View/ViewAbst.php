@@ -18,4 +18,5 @@ class ViewAbst {
         else echo('<p style="color: red; text-align: center; font-size:large;">
             Operation was not Executed !</p>');
     }
+    
 }

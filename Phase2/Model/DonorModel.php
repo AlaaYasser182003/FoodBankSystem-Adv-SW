@@ -32,9 +32,6 @@ class DonorModel extends ModifiableAbstModel {
         ':password' => $this->password,
         ':phonenumber' => $this->phone_number,
         ':gender' => $this->gender));
-        $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->id = $row['LAST_INSERT_ID()'];
         return 1;
     }
 
@@ -43,14 +40,7 @@ class DonorModel extends ModifiableAbstModel {
         $sql = "SELECT * FROM ".self::table." WHERE id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $this->id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->username = $row['username'];
-        $this->birthdate = $row['birthdate'];
-        $this->email =$row['email'];
-        $this->password = $row['password'];
-        $this->phone_number = $row['phone_number'];
-        $this->gender = $row['gender'];
-        return 1;
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
     public function edit() {
@@ -80,7 +70,22 @@ class DonorModel extends ModifiableAbstModel {
         $stmt = $pdo->query("SELECT * FROM ".self::table);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+/*
+    public function Checkemail($email){
+        global$pdo;
+         $sql = "SELECT COUNT(*) AS num_rows FROM".self::table."WHERE email = :email";
+         $stmt = $pdo->prepare($sql);
+         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+         $stmt->execute(); // Execute the prepared statement
+         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+         if($result !== false){
+ 
+         return true;
+         }
+         else return false;
+
+    }*/
     public function getUserName(){
         return $this->username;
     }

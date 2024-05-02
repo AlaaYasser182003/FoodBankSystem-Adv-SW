@@ -20,7 +20,7 @@ class HomeView extends ViewAbst {
                     <ul>'
         );
         if ($logged) {
-            echo('<li><a href="..\Controller\DonorController.php?cmd=">My Account</a></li>');
+            echo('<li><a href="..\Controller\DonorController.php?id='. $_SESSION['user_id'].'&cmd=myacc">My Account</a></li>');
             echo('<li><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></li>');
         }
         else {
@@ -79,7 +79,7 @@ class HomeView extends ViewAbst {
         
                             <button>Submit</button>
                         <p class="login-link">First Time?
-                        <a href="..\Controller\DonorController.php?cmd=signup">Sign Up</a>
+                        <a href="..\Controller\DonorController.php?cmd=signup&id=">Sign Up</a>
                         <a href="..\Controller\HomeController.php?cmd=home">Cancel</a></p>
                         </form>
                 </section>

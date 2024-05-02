@@ -12,7 +12,7 @@ class DonationModel extends ModifiableAbstModel {
     public function __construct($donor_id = "", $total_cost = 0, $donation_date = "") {
         $this->donor_id = $donor_id;
         $this->total_cost = $total_cost;
-        $this->amount = $donation_date;
+        $this->donation_date = $donation_date;
     }
 
     public function add() {
@@ -25,9 +25,6 @@ class DonationModel extends ModifiableAbstModel {
             'cost' => $this->total_cost,
             'date' => $this->donation_date,
         ));
-        $stmt = $pdo->query("SELECT LAST_INSERT_ID()");
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->id = $row['LAST_INSERT_ID()'];
         return 1;
     }
 
