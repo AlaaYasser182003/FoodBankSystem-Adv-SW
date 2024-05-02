@@ -40,12 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $command =='signup') {
 if ($command == 'myacc' && $id !== null)
 {
    $donor = new DonorModel();
-   $donor->setId($id);
-
-   if($donor->read() !== null){ 
-   $donorDetails = $donor->read();
-}
-   $donorView->ShowDonorDetails($donorDetails);
+   $donor->getById($id);
+   $donorView->ShowDonorDetails($donor);
 }
 
 if($command == 'showdonations'){
