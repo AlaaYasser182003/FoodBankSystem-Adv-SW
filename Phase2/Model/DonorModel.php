@@ -1,8 +1,9 @@
 <?php
 require_once "pdo.php";
 require_once "ModifiableAbstModel.php";
+require_once "IVerifiable.php";
 
-class DonorModel extends ModifiableAbstModel {
+class DonorModel extends ModifiableAbstModel implements IVerifiable {
     
     const table = "donor";
     private $username;
@@ -129,4 +130,8 @@ class DonorModel extends ModifiableAbstModel {
     {
         return $this->password;
     }
+    static function login($Username, $Password){
+        
+    }
+
 }

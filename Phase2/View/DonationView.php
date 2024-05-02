@@ -4,6 +4,7 @@ require_once  "../Model/DonorModel.php";
 
 class DonationsView extends ViewAbst{
     function ShowDonationsTable($rows) {
+        $donorModel = new DonorModel();
         echo('
         <!DOCTYPE html>
         <html lang="en">
@@ -39,7 +40,6 @@ class DonationsView extends ViewAbst{
                     </thead>
         ');
         
-        $donorModel = new DonorModel();
         foreach($rows as $row) {
             $donorModel->getById($row['donor_id']);
             echo('
