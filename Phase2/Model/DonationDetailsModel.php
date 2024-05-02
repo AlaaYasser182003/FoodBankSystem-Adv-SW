@@ -22,11 +22,10 @@ class DonationDetailsModel extends ModifiableAbstModel {
         $sql = "INSERT INTO ".self::table." (donation_id, item_id, Qty, price) 
         VALUES (:donation, :item, :qty, :price)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':donation' => $this->donation_id,
+        return $stmt->execute(array(':donation' => $this->donation_id,
         ':item_id' => $this->item_id,
         ':qty' => $this->Qty,
         ':price' => $this->price));
-        return 1;
     }
 
     public function read() {

@@ -18,9 +18,8 @@ class DistributorModel extends ModifiableAbstModel {
         $sql = "INSERT INTO ".self::table." (name, address) 
         VALUES (:name, :address)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':name' => $this->name,
+        return $stmt->execute(array(':name' => $this->name,
         'address' => $this->address ));
-        return 1;
     }
 
     public function read() {

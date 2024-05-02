@@ -27,13 +27,12 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
         $sql = "INSERT INTO ".self::table." (username, birthdate, email, password, phone_number, gender) 
         VALUES (:username, :birthdate, :email, :password, :phonenumber, :gender)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':username' => $this->username,
+        return $stmt->execute(array(':username' => $this->username,
         ':birthdate' => $this->birthdate,
         ':email' => $this->email,
         ':password' => $this->password,
         ':phonenumber' => $this->phone_number,
         ':gender' => $this->gender));
-        return 1;
     }
 
     public function read() {

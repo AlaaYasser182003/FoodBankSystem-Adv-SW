@@ -21,7 +21,7 @@ class ItemView extends ViewAbst{
         <h1>Item Database</h1>
         <nav>
             <ul>
-                <li><a href="dashboard.php">Dashboard</a></li>
+                <li><a href="..\View\dashboard.php">Dashboard</a></li>
             </ul>
         </nav>
 </header>
@@ -29,11 +29,11 @@ class ItemView extends ViewAbst{
 
    <div class="admin-object-form-container">
 
-      <form  method="post">
+      <form  action="..\Controller\ItemController.php?cmd=add" method="post">
          <h3>add a new item</h3>
-         <input type="text" placeholder="enter item name" name="name" class="box" required>
+         <input type="text" placeholder="enter item name" name="item_name" class="box" required>
          <input type="number" placeholder="enter item amount" name="amount" class="box" required>
-         <input type="number" step="0.001 "placeholder="enter item cost" name="cost" class="box" required>
+         <input type="number" step="0.001 "placeholder="enter item cost" name="item_cost" class="box" required>
          <input type="number" placeholder="enter program id" name="program_id" class="box" required>
          <input type="submit" class="btn" name="add_item" value="Create">
       </form>
@@ -93,7 +93,7 @@ class ItemView extends ViewAbst{
        <meta charset="UTF-8">
        <meta http-equiv="X-UA-Compatible" content="IE=edge">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link rel="stylesheet" href="CRUD.css">
+       <link rel="stylesheet" href="..\CSS\CRUD.css">
     </head>
     <body>
     
@@ -103,14 +103,14 @@ class ItemView extends ViewAbst{
     
     
     <div class="admin-object-form-container centered">
-       <form method="post">
+       <form  method="post">
           <h3 class="title">Edit the item</h3>
-          <input type="text" class="box" name="name" value="'.$obj->getItemName().'" placeholder="enter item name">
-          <input type="number" min="0" class="box" name="amount" value="'.$obj->getamount().'" placeholder="enter amount">
+          <input type="text" class="box" name="item_name" value="'.$obj->getItemName().'" placeholder="enter item name">
+          <input type="number" min="0" class="box" name="amount" value="'.$obj->getAmount().'" placeholder="enter amount">
           <input type="number" class="box" step="0.001" name="item_cost" value="'.$obj->getCost().'" placeholder="enter cost">
           <input type="number" class="box" name="program_id" value="'.$obj->getProgramID().'" placeholder="enter program id">
           <input type="submit" value="Update" name="update_item" class="btn">
-          <a href="itemCRUD.php" class="btn">Cancel</a>
+          <a href="../Controller/ItemController.php?cmd=viewAll" class="btn">Cancel</a>
        </form>
     </div>
     

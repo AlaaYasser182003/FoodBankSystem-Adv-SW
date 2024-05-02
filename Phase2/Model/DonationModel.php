@@ -20,12 +20,11 @@ class DonationModel extends ModifiableAbstModel {
         $sql = "INSERT INTO ".self::table." (donor_id, total_cost, donation_date)
         VALUES (:donor, :cost, :date)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(
+        return $stmt->execute(array(
             'donor' => $this->donor_id,
             'cost' => $this->total_cost,
             'date' => $this->donation_date,
         ));
-        return 1;
     }
 
     public function read() {

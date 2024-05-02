@@ -21,13 +21,12 @@ class ItemModel extends ModifiableAbstModel {
     public function add() {
         global $pdo;
         $sql = "INSERT INTO " . self::table . " (program_id, item_name, item_cost, amount) 
-        VALUES (:PID, :Iname, :cost, :amount)";
+        VALUES (:program_id, :item_name, :item_cost, :amount)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':PID' => $this->program_id,
-        ':Iname' => $this->item_name,
-        ':cost' => $this->item_cost,
-        'amount' => $this->amount ));
-        return 1;
+        return $stmt->execute(array(':program_id' => $this->program_id,
+        ':item_name' => $this->item_name,
+        ':item_cost' => $this->item_cost,
+        ':amount' => $this->amount ));
     }
 
     public function read() {
@@ -41,7 +40,7 @@ class ItemModel extends ModifiableAbstModel {
         $this->item_name = $row['item_name'];
         $this->item_cost = $row['item_cost'];
         $this->amount = $row['amount'];
-        return 1;
+        
     }
 
     public function edit() {

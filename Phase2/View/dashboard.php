@@ -16,11 +16,11 @@
     <div class="row">
         <div class="role">
             <img src="https://s3.amazonaws.com/uww.assets/site/blog/Getty_volunteering_hands_raised_graphi_.jpg" alt="Role 1">
-            <a href="progCRUD.php">Program Coordinator</a>
+            <a href="../Controller/ProgramController.php?cmd=viewAll">Program Coordinator</a>
         </div>
         <div class="role">
             <img src="https://www.newcastlesys.com/hs-fs/hubfs/2022/0406/220406-how-to-keep-your-warehouse-organized.jpeg?width=1500&name=220406-how-to-keep-your-warehouse-organized.jpeg" alt="Role 2">
-            <a href="itemCRUD.php">Warehouse Coordinator</a>
+            <a href="../Controller/ItemController.php?cmd=viewAll">Warehouse Coordinator</a>
         </div>
         <div class="role">
             <img src="https://www.rmmagazine.com/images/default-source/magazineimages/2022/6/managing-procurement-risk.jpg?sfvrsn=620674f4_1" alt="Role 3">

@@ -18,9 +18,8 @@ class ProgramModel extends ModifiableAbstModel {
         $sql = "INSERT INTO " . self::table . " (program_name, description) 
         VALUES (:program, :description)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':program' => $this->program_name,
+        return $stmt->execute(array(':program' => $this->program_name,
         ':description' => $this->description));
-        return 1;
     }
 
     public function read() {
