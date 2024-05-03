@@ -60,5 +60,8 @@ class ProgramModel extends ModifiableAbstModel {
     public function getProgramName(){
         return $this->program_name;
     }
+    public function getProgramDescription(){
+        return $this->description;
+    }
 }
 ?>
