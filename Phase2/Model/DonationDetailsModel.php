@@ -22,10 +22,12 @@ class DonationDetailsModel extends ModifiableAbstModel {
         $sql = "INSERT INTO ".self::table." (donation_id, item_id, Qty, price) 
         VALUES (:donation, :item, :qty, :price)";
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute(array(':donation' => $this->donation_id,
-        ':item_id' => $this->item_id,
+        $stmt->execute(array(
+        ':donation' => $this->donation_id,
+        ':item' => $this->item_id,
         ':qty' => $this->Qty,
         ':price' => $this->price));
+        return 1;
     }
 
     public function read() {
@@ -70,4 +72,21 @@ class DonationDetailsModel extends ModifiableAbstModel {
         $stmt = $pdo->query("SELECT * FROM ".self::table);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function setDonationId($id){
+        $this->donation_id_id=$id;
+    }
+    public function setItemId($itemid){
+        $this->item_id=$itemid;
+    }
+    public function setPrice($prc){
+        $this->price=$prc;
+    }
+    public function setQuantity($quantity){
+        $this->Qty=$quantity;
+    }
+    public function getQuantity(){
+        return $this->Qty;
+    }
+
 }
