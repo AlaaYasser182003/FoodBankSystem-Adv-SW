@@ -70,6 +70,14 @@ class ItemModel extends ModifiableAbstModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function view_all_id($id){
+        global $pdo;
+        $sql = "SELECT * FROM ".self::table." WHERE program_id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getItemName(){
         return $this->item_name;
     }
