@@ -81,4 +81,11 @@ class DonationModel extends ModifiableAbstModel {
 
         return $this;
     }
+    
+    public function setTotalCost($cost){
+        $this->total_cost = $cost;
+    }
+    public function setDate($date){
+        $this->donation_date = $date;
+    }
 }
