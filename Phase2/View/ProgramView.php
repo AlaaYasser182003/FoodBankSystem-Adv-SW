@@ -1,5 +1,7 @@
 <?php
 require_once "ViewAbst.php";
+require_once  "../Model/ProgramModel.php";
+require_once  "../Model/ItemModel.php";
 
 class ProgramView extends ViewAbst {
     function ShowProgramsTable() {
@@ -108,6 +110,54 @@ class ProgramView extends ViewAbst {
             
             </div>
             
+            </body>
+        </html>');
+    }
+
+    function ShowProgramToUser($program,$stmt){
+        session_start();
+        echo('<html lang="en"><head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="..\CSS\index.css">
+                <title>Food Bank</title>
+            </head>
+            <body>
+                <header>
+                    <h1>Food Bank</h1>
+                    <nav>
+                        <ul>
+                            <li><a href="..\Controller\HomeController.php">Home</a></li>
+                            <li><a href="..\Controller\DonorController.php?id='. $_SESSION['user_id'].'&cmd=myacc">My Account</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                
+                <main>
+                    '.$program->getProgramName().'<br>'.$program->getProgramDescription().'
+                    <form action="CartController.php?cmd=addToCart&id='.$_GET['id'].'" method="post">
+                    <label for="item"> Choose item: </label>
+                    <select name = "item">');
+        foreach($stmt as $row){
+            $ItemModel = new ItemModel();
+            $ItemModel->getById($row['id']);
+            echo('<option value="'.$ItemModel->getId().'">'.$ItemModel->getItemName().'</option>');
+        }            
+              echo('     
+                </select> 
+                <label>Amount: </label>
+                <input type="number" id="quantity" name="quantity" required> 
+                <br><br>
+                <input type="hidden" name="program_name" value="'.$program->getProgramName().'">
+                <input type="hidden" name="program_id" value="'.$program->getId().'">
+                <input type="submit" value="Add to Cart">
+                </form>
+                <p class="Checkout-link"><a href="..\Controller\CartController.php?cmd=showcart">Donate</a></p>
+                <p class="Cancel-link"><a href="..\Controller\HomeController.php">Cancel</a></p>
+                </main>
+                <footer>
+                    <p>© 2024 Food Bank</p>
+                </footer>
             </body>
         </html>');
     }
