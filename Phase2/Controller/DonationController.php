@@ -11,5 +11,11 @@ if ($command == 'viewAll') {
     $donationView->ShowDonationsTable($stmt);
 }
 if ($command == 'add') {
-   echo 1; 
+    session_start();
+    $donationModel->setDonorId($_SESSION['user_id']);
+    $donationModel->setTotalCost($_GET['cost']);
+    $donationModel->setDate(date('y-m-d'));
+    $donationModel->add(); 
+    header("Location: DonationDetailsController.php?cmd=add&id=".$pdo->lastInsertId());
+    return;
 }
