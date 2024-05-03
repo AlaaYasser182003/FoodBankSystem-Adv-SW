@@ -5,6 +5,8 @@ require_once "..\Model\pdo.php";
 
 $command = $_GET['cmd'];
 $ProgView = new ProgramView();
+$programView = new ProgramView();//kslt aghayar
+$programModel = new ProgramModel();
 
 if ($command == 'viewAll') {
     $ProgView->ShowProgramsTable();
@@ -33,5 +35,13 @@ else if ($command == 'add' && $_POST['cmd'] == $command) {
 
 else if ($command == 'delete')
     $ProgView->ChangeProgram(ProgramModel::remove($_GET['id']));
+
+if ($command == 'showtouser')
+{
+    $programkey = $_GET['id'];
+   $programModel->getById($programkey);
+   $stmt = ItemModel::view_all_id($programkey);
+   $programView->ShowProgramToUser($programModel,$stmt);
+}
 
 $ProgView->PrintFooter();
