@@ -1,8 +1,8 @@
 <?php
-require_once "..\View\HomeView.php";
-require_once "..\Model\ProgramModel.php";
-require_once "..\Model\DonorModel.php";
-require_once "..\Model\pdo.php";
+require_once "../View/HomeView.php";
+require_once "../Model/ProgramModel.php";
+require_once "../Model/DonorModel.php";
+require_once "../Model/pdo.php";
 session_start();
 
 $homeView = new HomeView();
@@ -13,9 +13,9 @@ if (!isset($_GET['cmd'])) {
         $password = $_POST['password'];
         $logged = DonorModel::login($username, $password);
         if ($logged)
-            header("Location: ..\Controller\HomeController.php");
+            header("Location: ../Controller/HomeController.php");
         else
-            header("Location: ..\Controller\HomeController.php?cmd=login");
+            header("Location: ../Controller/HomeController.php?cmd=login");
         exit();
     }
 
@@ -39,7 +39,7 @@ else {
 
     else if ($command == 'logout') {
         session_destroy();
-        header("Location: ..\Controller\HomeController.php");
+        header("Location: ../Controller/HomeController.php");
         exit();
     }
 

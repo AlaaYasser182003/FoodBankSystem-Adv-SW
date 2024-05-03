@@ -9,7 +9,7 @@ class HomeView extends ViewAbst {
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="..\CSS\CRUD.css">
+            <link rel="stylesheet" href="../CSS/CRUD.css">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
             <title>Food Bank</title>
         </head>
@@ -20,12 +20,12 @@ class HomeView extends ViewAbst {
                     <ul>'
         );
         if ($logged) {
-            echo('<li><a href="..\Controller\DonorController.php?id='. $_SESSION['user_id'].'&cmd=myacc">My Account</a></li>');
-            echo('<li><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></li>');
+            echo('<li><a href="../Controller/DonorController.php?id='. $_SESSION['user_id'].'&cmd=myacc">My Account</a></li>');
+            echo('<li><a href="../Controller/HomeController.php?cmd=logout">Logout</a></li>');
         }
         else {
-            echo('<li><a href="..\Controller\HomeController.php?cmd=login">Login</a></li>');
-            echo('<li><a href="..\View\dashboard.php">Dashboard</a></li>');
+            echo('<li><a href="../Controller/HomeController.php?cmd=login">Login</a></li>');
+            echo('<li><a href="../View/dashboard.php">Dashboard</a></li>');
         }
         echo('
                   </ul>
@@ -64,7 +64,7 @@ class HomeView extends ViewAbst {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="..\CSS\login.css">
+                <link rel="stylesheet" href="../CSS/login.css">
                 <title>Login</title>
             </head>
             <body>
@@ -73,7 +73,7 @@ class HomeView extends ViewAbst {
                     if ($error != null)
                         echo('<p style="color: red;">'.$error.'</p>');
                     echo('
-                            <form action="..\Controller\HomeController.php" method="POST" class="form">
+                            <form action="../Controller/HomeController.php" method="POST" class="form">
                             <div class = "input-box">
                                 <label>Username:</label>
                                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -86,8 +86,8 @@ class HomeView extends ViewAbst {
         
                             <button>Submit</button>
                         <p class="login-link">First Time?
-                        <a href="..\Controller\DonorController.php?cmd=signup&id=">Sign Up</a>
-                        <a href="..\Controller\HomeController.php">Cancel</a></p>
+                        <a href="../Controller/DonorController.php?cmd=signup&id=">Sign Up</a>
+                        <a href="../Controller/HomeController.php">Cancel</a></p>
                         </form>
                 </section>
             </body>

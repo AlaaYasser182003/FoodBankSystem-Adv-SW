@@ -1,6 +1,6 @@
 <?php
 
-require_once "..\View\ViewAbst.php";
+require_once "../View/ViewAbst.php";
 
 class ItemView extends ViewAbst{
 
@@ -12,7 +12,7 @@ class ItemView extends ViewAbst{
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="..\CSS\CRUD.css">
+        <link rel="stylesheet" href="../CSS/CRUD.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <title>Item CRUD</title>
 </head>
@@ -21,7 +21,7 @@ class ItemView extends ViewAbst{
         <h1>Item Database</h1>
         <nav>
             <ul>
-                <li><a href="..\View\dashboard.php">Dashboard</a></li>
+                <li><a href="../View/dashboard.php">Dashboard</a></li>
             </ul>
         </nav>
 </header>
@@ -29,7 +29,7 @@ class ItemView extends ViewAbst{
 
    <div class="admin-object-form-container">
 
-      <form  action="..\Controller\ItemController.php?cmd=add" method="post">
+      <form  action="../Controller/ItemController.php?cmd=add" method="post">
          <h3>add a new item</h3>
          <input type="text" placeholder="enter item name" name="item_name" class="box" required>
          <input type="number" placeholder="enter item amount" name="amount" class="box" required>
@@ -70,7 +70,7 @@ class ItemView extends ViewAbst{
         echo('<html lang="en"><head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="..\CSS\CRUD.css">
+            <link rel="stylesheet" href="../CSS/CRUD.css">
             <title>Food Bank</title>
         </head>
         <body>
@@ -93,7 +93,7 @@ class ItemView extends ViewAbst{
        <meta charset="UTF-8">
        <meta http-equiv="X-UA-Compatible" content="IE=edge">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link rel="stylesheet" href="..\CSS\CRUD.css">
+       <link rel="stylesheet" href="../CSS/CRUD.css">
     </head>
     <body>
     

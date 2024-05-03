@@ -1,6 +1,6 @@
 <?php
-require_once "..\Model\ItemModel.php";
-require_once "..\View\ItemView.php";
+require_once "../Model/ItemModel.php";
+require_once "../View/ItemView.php";
 
 $command = $_GET['cmd'];
 $itemView = new ItemView();  

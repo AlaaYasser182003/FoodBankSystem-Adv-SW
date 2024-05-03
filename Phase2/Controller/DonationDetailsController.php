@@ -1,6 +1,6 @@
 <?php
-require_once "..\Model\DonationDetailsModel.php";
-require_once "..\View\DonationDetailsView.php";
+require_once "../Model/DonationDetailsModel.php";
+require_once "../View/DonationDetailsView.php";
 
 $command = $_GET['cmd'];
 $donationkey = $_GET['id'];

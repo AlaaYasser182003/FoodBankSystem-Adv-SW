@@ -10,7 +10,7 @@ class DistributorView extends ViewAbst {
                     <meta charset="UTF-8">
                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <link rel="stylesheet" href="..\CSS\CRUD.css">
+                    <link rel="stylesheet" href="../CSS/CRUD.css">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
                     <title>Distributor CRUD</title>
             </head>
@@ -19,7 +19,7 @@ class DistributorView extends ViewAbst {
                     <h1>Distributor Database</h1>
                     <nav>
                         <ul>
-                            <li><a href="..\View\dashboard.php">Dashboard</a></li>
+                            <li><a href="../View/dashboard.php">Dashboard</a></li>
                         </ul>
                     </nav>
             </header>
@@ -63,7 +63,7 @@ class DistributorView extends ViewAbst {
         echo('<html lang="en"><head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="..\CSS\CRUD.css">
+            <link rel="stylesheet" href="../CSS/CRUD.css">
             <title>Food Bank</title>
         </head>
         <body>
@@ -85,7 +85,7 @@ class DistributorView extends ViewAbst {
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="..\CSS\CRUD.css">
+            <link rel="stylesheet" href="../CSS/CRUD.css">
             </head>
             <body>
             

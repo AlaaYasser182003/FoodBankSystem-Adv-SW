@@ -55,8 +55,8 @@ class DonationDetailsView extends ViewAbst {
                 <td>'.$itemModel->getItemName().'</td>
                 <td>'.$programModel->getProgramName().'</td>
                 <td>'.$row['Qty'].'</td>
-                <td>$'.$row['price'].'</td>
-                <td>$'.$row['Qty']*$row['price'].'</td>
+                <td>'.$row['price'].'EGP</td>
+                <td>'.$row['Qty']*$row['price'].'EGP</td>
             </tr>');
         }
     }

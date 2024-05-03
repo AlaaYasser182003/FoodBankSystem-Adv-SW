@@ -1,11 +1,10 @@
 <?php
-require_once "..\Model\DonorModel.php";
-require_once "..\View\DonorView.php";
+require_once "../Model/DonorModel.php";
+require_once "../View/DonorView.php";
 
 $command = $_GET['cmd'];
 $id = $_GET['id'];
 $donorView = new DonorView();
-$donorModel = new DonorModel();
 
 if ($command == 'signup') {
   //  $stmt = DonationModel::view_all();
@@ -39,9 +38,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $command =='signup') {
 }
 if ($command == 'myacc' && $id !== null)
 {
-   $donor = new DonorModel();
-   $donor->getById($id);
-   $donorView->ShowDonorDetails($donor);
+  if ($_SERVER["REQUEST_METHOD"] == "POST")
+  {
+    session_start();
+    $donorModel = new DonorModel($_POST['username'], $_POST['birthdate'],
+      $_POST['email'], $_POST['password'], $_POST['phone'], $_POST['gender']);
+    $donorModel->setId($_SESSION['user_id']);
+    $donorModel->edit();
+    header("Location: HomeController.php");
+    exit();
+  }
+  else{
+    $donor = new DonorModel();
+    $donor->getById($id);
+    $donorView->ShowDonorDetails($donor);
+  }
 }
 
 if($command == 'showdonations'){

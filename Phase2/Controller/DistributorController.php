@@ -1,6 +1,6 @@
 <?php
-require_once "..\Model\DistributorModel.php";
-require_once "..\View\DistributorView.php";
+require_once "../Model/DistributorModel.php";
+require_once "../View/DistributorView.php";
 
 $command = $_GET['cmd'];
 $distView = new DistributorView();

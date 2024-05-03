@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="..\CSS\dashboard.css">
+        <link rel="stylesheet" href="../CSS/dashboard.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <title>Roles Dashboard</title>
 </head>
@@ -30,11 +30,11 @@
     <div class="row">
         <div class="role">
             <img src="https://media.compliancesigns.com/cdn-cgi/image/width=526,format=auto,quality=90/media/catalog/product/i/n/information-sign-nhe-32371_1000.gif" alt="Role 4">
-            <a href="..\Controller\DonationController.php?cmd=viewAll">Executive Director</a>
+            <a href="../Controller/DonationController.php?cmd=viewAll">Executive Director</a>
         </div>
         <div class="role">
             <img src="https://i.pinimg.com/564x/74/d7/b0/74d7b05c3476e062ca7c26452ffb22cb.jpg" alt="Role 5">
-            <a href="..\Controller\HomeController.php">Donor</a>
+            <a href="../Controller/HomeController.php">Donor</a>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 <?php
-require_once "..\Model\SupplierModel.php";
-require_once "..\View\SupplierView.php";
+require_once "../Model/SupplierModel.php";
+require_once "../View/SupplierView.php";
 
 /*
 $command = $_GET['cmd'];
