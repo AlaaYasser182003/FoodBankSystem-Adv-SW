@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2024 at 06:22 PM
+-- Generation Time: May 03, 2024 at 03:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,9 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `distributor` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(128) DEFAULT NULL,
-  `address` varchar(128) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `name` varchar(30) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `distributor`
+--
+
+INSERT INTO `distributor` (`id`, `name`, `address`) VALUES
+(1, 'Al-Rahma', 'july23 - Abbasiya Square'),
+(2, 'Al-Aswaq', 'Al-Gomhouria Street - Assiut'),
+(3, 'Emdad', 'Saad Zaghloul Street - Fayoum'),
+(4, 'Rawabi', 'Corniche Street - Aswan'),
+(5, 'Al-Meera', 'Al-Galaa Street - Tanta');
 
 -- --------------------------------------------------------
 
@@ -41,18 +52,17 @@ CREATE TABLE `distributor` (
 
 CREATE TABLE `donations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `donor_id` int(10) UNSIGNED NOT NULL,
-  `total_cost` float NOT NULL,
+  `donor_id` int(10) UNSIGNED DEFAULT NULL,
+  `total_cost` float UNSIGNED NOT NULL,
   `donation_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donations`
 --
 
 INSERT INTO `donations` (`id`, `donor_id`, `total_cost`, `donation_date`) VALUES
-(1, 1, 1000, '2024-04-03'),
-(2, 3, 500, '2024-04-03');
+(1, 1, 800, '2024-03-22');
 
 -- --------------------------------------------------------
 
@@ -62,19 +72,19 @@ INSERT INTO `donations` (`id`, `donor_id`, `total_cost`, `donation_date`) VALUES
 
 CREATE TABLE `donation_details` (
   `id` int(10) UNSIGNED NOT NULL,
-  `donation_id` int(10) UNSIGNED NOT NULL,
-  `item_id` int(10) UNSIGNED NOT NULL,
-  `Qty` int(11) DEFAULT NULL,
-  `price` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `donation_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `Qty` int(10) UNSIGNED NOT NULL,
+  `price` float UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donation_details`
 --
 
 INSERT INTO `donation_details` (`id`, `donation_id`, `item_id`, `Qty`, `price`) VALUES
-(1, 1, 2, 5, 200),
-(2, 1, 1, 7, 21);
+(1, 1, 2, 3, 300),
+(2, 1, 3, 1, 500);
 
 -- --------------------------------------------------------
 
@@ -85,23 +95,24 @@ INSERT INTO `donation_details` (`id`, `donation_id`, `item_id`, `Qty`, `price`) 
 CREATE TABLE `donor` (
   `id` int(10) UNSIGNED NOT NULL,
   `username` varchar(128) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `phone_number` varchar(128) DEFAULT NULL,
-  `gender` tinyint(4) DEFAULT NULL,
-  `birthdate` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `gender` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donor`
 --
 
-INSERT INTO `donor` (`id`, `username`, `email`, `password`, `phone_number`, `gender`, `birthdate`) VALUES
-(1, 'omarsame', 'omar.sameh612@gmail.com', '123', '01061555539', 0, '2024-04-01'),
-(2, 'omars', 'oma612@gmail.com', '456', '010615555', 1, '2024-04-30'),
-(3, 'aya', 'aya@gmail.com', 'asdf', '111', 1, '2024-04-18'),
-(4, 'w', 'omar.sameh612@gmail.com', 'w', '01061555539', 1, '2024-04-16'),
-(5, 'aa', 'omar.sameh612@gmail.com', 'aa', '01061555539', 1, '2024-04-24');
+INSERT INTO `donor` (`id`, `username`, `birthdate`, `email`, `password`, `phone_number`, `gender`) VALUES
+(1, 'Aya', '1992-08-25', 'aya17@hotmail.com', 'aya_pass123', '01098765432', 1),
+(2, 'Youssef', '1985-12-10', 'youssefH@gmail.com', 'youssef_pass', '01198765432', 0),
+(3, 'Nour', '1998-04-03', 'nourBassel22@gmail.com', 'nour123', '01298765432', 1),
+(4, 'Ahmed', '1990-05-15', 'ahmedelwazeer90@hotmail.com', 'password123', '01012345678', 0),
+(5, 'Fatma', '1988-10-20', 'fatmawaked19@gmail.com', 'fatma_password', '01123456789', 1),
+(6, 'Mohamed', '1995-03-08', 'mohamed6677@gmail.com', 'mohamed_pass', '01234567890', 0);
 
 -- --------------------------------------------------------
 
@@ -111,21 +122,23 @@ INSERT INTO `donor` (`id`, `username`, `email`, `password`, `phone_number`, `gen
 
 CREATE TABLE `item` (
   `id` int(10) UNSIGNED NOT NULL,
-  `item_name` varchar(128) NOT NULL,
-  `program_id` int(10) UNSIGNED NOT NULL,
-  `item_cost` float NOT NULL,
-  `amount` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `item_name` varchar(128) DEFAULT NULL,
+  `program_id` int(10) UNSIGNED DEFAULT NULL,
+  `item_cost` float UNSIGNED DEFAULT NULL,
+  `amount` mediumint(128) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
 INSERT INTO `item` (`id`, `item_name`, `program_id`, `item_cost`, `amount`) VALUES
-(1, 'Item 1', 1, 10, 10),
-(2, 'Item 2', 1, 20, 20),
-(3, 'Item 3', 2, 30, 30),
-(4, 'Item 4', 3, 40.5, 40);
+(1, 'Monthly Carton', 1, 500, 600),
+(2, 'Orphan meal', 2, 100, 2000),
+(3, 'Gaza family box', 5, 500, 1080),
+(4, 'kafara meal', 4, 65, 1000),
+(5, 'Sheep', 3, 8500, 200),
+(6, 'Calf', 3, 20000, 170);
 
 -- --------------------------------------------------------
 
@@ -136,18 +149,19 @@ INSERT INTO `item` (`id`, `item_name`, `program_id`, `item_cost`, `amount`) VALU
 CREATE TABLE `program` (
   `id` int(10) UNSIGNED NOT NULL,
   `program_name` varchar(128) DEFAULT NULL,
-  `description` varchar(128) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `description` varchar(1024) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `program`
 --
 
 INSERT INTO `program` (`id`, `program_name`, `description`) VALUES
-(1, 'Program 1', 'desc. 1'),
-(2, 'Program 2', 'desc. 2'),
-(3, 'Program 3', 'desc. 3'),
-(4, 'Program 4', 'desc. 4');
+(1, 'Feed a Family', 'Provides dry food to eligible cases and families, they receive the carton on a monthly basis.'),
+(2, 'Feed an Orphan', 'Enhance the growth of orphan children by providing healthy food to improve their mental and physical abilities.'),
+(3, 'Fido and Aqeeqah', 'For the newborn, the purchase of a new asset such as a car or something else.'),
+(4, 'Al-Kafara', 'The Egyptian Food Bank accepts the Kafara, and distributes it in the form of a meal'),
+(5, 'Help for Gaza', 'The Egyptian Food Bank launches an urgent humanitarian relief campaign to help our affected families in the Gaza.');
 
 -- --------------------------------------------------------
 
@@ -157,17 +171,20 @@ INSERT INTO `program` (`id`, `program_name`, `description`) VALUES
 
 CREATE TABLE `supplier` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(128) DEFAULT NULL,
-  `address` varchar(128) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `name` varchar(20) DEFAULT NULL,
+  `address` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `supplier`
 --
 
 INSERT INTO `supplier` (`id`, `name`, `address`) VALUES
-(1, 'omarsameh', 'add1'),
-(2, 'asd', 'dsa');
+(1, 'Farm Village', 'European countryside - Cairo'),
+(2, 'Sunshine Acres', 'Helmeyat Al-zaytoon'),
+(3, 'AlBaik', 'Juhayna Square - Cairo'),
+(4, 'Al-Hassan and Al-Hus', 'Saad Zaghloul - Tanta'),
+(5, 'Sheikh Al-Mandi', 'Al-Andalus - 5th settelment');
 
 --
 -- Indexes for dumped tables
@@ -183,16 +200,13 @@ ALTER TABLE `distributor`
 -- Indexes for table `donations`
 --
 ALTER TABLE `donations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `donor_id` (`donor_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `donation_details`
 --
 ALTER TABLE `donation_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `donation_id` (`donation_id`),
-  ADD KEY `item_id` (`item_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `donor`
@@ -204,8 +218,7 @@ ALTER TABLE `donor`
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `program_id` (`program_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `program`
@@ -227,66 +240,43 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `distributor`
 --
 ALTER TABLE `distributor`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `donation_details`
 --
 ALTER TABLE `donation_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `donations`
---
-ALTER TABLE `donations`
-  ADD CONSTRAINT `donations_ibfk_1` FOREIGN KEY (`donor_id`) REFERENCES `donor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `donation_details`
---
-ALTER TABLE `donation_details`
-  ADD CONSTRAINT `donation_details` FOREIGN KEY (`donation_id`) REFERENCES `donations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `item_details` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `item`
---
-ALTER TABLE `item`
-  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
