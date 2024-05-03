@@ -5,14 +5,10 @@ require_once "..\Model\pdo.php";
 
 $command = $_GET['cmd'];
 $ProgView = new ProgramView();
-$programView = new ProgramView();//kslt aghayar
-$programModel = new ProgramModel();
 
 if ($command == 'viewAll') {
-    $ProgView->ShowProgramsTable();
     $stmt = ProgramModel::view_all();
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-        $ProgView->ShowProgramsRows($row);
+    $ProgView->ShowProgramsTable($stmt);
 }
 
 else if ($command == 'edit') {
@@ -38,10 +34,12 @@ else if ($command == 'delete')
 
 if ($command == 'showtouser')
 {
+    require_once "../Model/ItemModel.php";
+    $programModel = new ProgramModel();
     $programkey = $_GET['id'];
-   $programModel->getById($programkey);
-   $stmt = ItemModel::view_all_id($programkey);
-   $programView->ShowProgramToUser($programModel,$stmt);
+    $programModel->getById($programkey);
+    $stmt = ItemModel::view_all_id($programkey);
+    $ProgView->ShowProgramToUser($programModel,$stmt);
 }
 
 $ProgView->PrintFooter();

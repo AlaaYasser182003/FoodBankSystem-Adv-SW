@@ -2,7 +2,7 @@
 require_once "ViewAbst.php";
 
 class SupplierView extends ViewAbst {
-    function ShowSuppliersTable() {
+    function ShowSuppliersTable($rows) {
         
         echo('<!DOCTYPE html>
             <html lang="en">
@@ -47,18 +47,17 @@ class SupplierView extends ViewAbst {
                         <th>Action</th>
                     </tr>
                     </thead>');
-    }
-
-    function ShowSuppliersRows($row) {
-        echo('<tr>
-            <td>'.$row['id'].'</td>
-            <td>'.$row['name'].'</td>
-            <td>'.$row['address'].'</td>
-            <td>
-               <a href="SupplierController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
-               <a href="SupplierController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
-            </td>
-        </tr>');
+        foreach ($rows as $row) {
+            echo('
+                <tr><td>'.$row['id'].'</td>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['address'].'</td>
+                <td>
+                <a href="SupplierController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
+                <a href="SupplierController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
+                </td></tr>
+            ');
+        }
     }
 
     function ChangeSupplier($succ) {

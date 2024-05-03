@@ -2,7 +2,7 @@
 require_once "../Model/SupplierModel.php";
 require_once "../View/SupplierView.php";
 
-/*
+
 $command = $_GET['cmd'];
 $suppView = new SupplierView();
 
@@ -33,4 +33,4 @@ else if ($command == 'delete')
     $suppView->ChangeSupplier(SupplierModel::remove($_GET['id']));
 
 $suppView->PrintFooter();
-*/
+

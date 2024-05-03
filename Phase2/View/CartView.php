@@ -66,7 +66,7 @@ class CartView extends ViewAbst {
                 <tr>
                     <td><a href="HomeController.php?" class="btn"> Back to Home </a></td>
                     <td><a href="CartController.php?cmd=removeall" class="btn"> Remove All </a></td>
-                    <td><a href="DonationController.php?cmd=add&cost='.$quantity*$itemModel->getCost().'" class="btn"> Donate Now </a></td>    
+                    <td><a href="DonationController.php?cmd=add&cost='.$total.'" class="btn"> Donate Now </a></td>    
                 </tr>
                 <div class="message">Grand Total: '.$total.'</div>'
             );

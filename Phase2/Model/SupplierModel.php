@@ -53,7 +53,7 @@ class SupplierModel extends ModifiableAbstModel {
 
     public static function view_all(){
         global $pdo;
-        $stmt = $pdo->query("SELECT * FROM {self::table}");
+        $stmt = $pdo->query("SELECT * FROM ". self::table);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

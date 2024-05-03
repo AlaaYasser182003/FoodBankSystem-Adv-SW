@@ -1,10 +1,9 @@
 <?php
 require_once "ViewAbst.php";
 require_once  "../Model/ProgramModel.php";
-require_once  "../Model/ItemModel.php";
 
 class ProgramView extends ViewAbst {
-    function ShowProgramsTable() {
+    function ShowProgramsTable($rows) {
         
         echo('<!DOCTYPE html>
             <html lang="en">
@@ -49,18 +48,17 @@ class ProgramView extends ViewAbst {
                         <th>Action</th>
                     </tr>
                     </thead>');
-    }
-
-    function ShowProgramsRows($row) {
-        echo('<tr>
-            <td>'.$row['id'].'</td>
-            <td>'.$row['name'].'</td>
-            <td>'.$row['address'].'</td>
-            <td>
-               <a href="ProgramController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
-               <a href="ProgramController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
-            </td>
-        </tr>');
+            foreach ($rows as $row) {
+                echo('
+                    <tr><td>'.$row['id'].'</td>
+                    <td>'.$row['program_name'].'</td>
+                    <td>'.$row['description'].'</td>
+                    <td>
+                    <a href="ProgramController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
+                    <a href="ProgramController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
+                    </td></tr>
+                ');
+            }
     }
 
     function ChangeProgram($succ) {
@@ -101,8 +99,8 @@ class ProgramView extends ViewAbst {
             <div class="admin-object-form-container centered">
             <form method="post">
                 <h3 class="title">Edit the Program</h3>
-                <input type="text" class="box" name="name" value="'.$obj->getName().'" placeholder="enter the Program name" required>
-                <input type="text" min="0" class="box" name="address" value="'.$obj->getAddress().'" placeholder="enter the Program address" required>
+                <input type="text" class="box" name="name" value="'.$obj->getProgramName().'" placeholder="enter the Program name" required>
+                <input type="text" min="0" class="box" name="address" value="'.$obj->getProgramDescription().'" placeholder="enter the Program address" required>
                 <input type="submit" value="Update" name="update_Program" class="btn">
                 <a href="ProgramController.php?cmd=viewAll" class="btn">Cancel</a>
             </form>
