@@ -4,7 +4,6 @@ require_once "../View/DonationView.php";
 
 $command = $_GET['cmd'];
 $donationView = new DonationsView();
-$donationModel = new DonationModel();
 
 if ($command == 'viewAll') {
     $stmt = DonationModel::view_all();
@@ -12,9 +11,7 @@ if ($command == 'viewAll') {
 }
 if ($command == 'add') {
     session_start();
-    $donationModel->setDonorId($_SESSION['user_id']);
-    $donationModel->setTotalCost($_GET['cost']);
-    $donationModel->setDate(date('y-m-d'));
+    $donationModel = new DonationModel($_SESSION['user_id'], $_GET['cost'], date('y-m-d'));
     $donationModel->add(); 
     header("Location: DonationDetailsController.php?cmd=add&id=".$pdo->lastInsertId());
     return;

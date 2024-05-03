@@ -20,6 +20,5 @@ if($command == 'add'){
         $x->add();
     }
     $_SESSION['cart'] = array(); //to empty the cart after the donation
-    header("Location: HomeController.php");
-    return;
+    $donationDetailsView->ShowReciept($donationkey,DonationDetailsModel::view_all_id($donationkey));
 }
