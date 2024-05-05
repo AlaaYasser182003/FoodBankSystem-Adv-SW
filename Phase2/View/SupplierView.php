@@ -53,8 +53,8 @@ class SupplierView extends ViewAbst {
                 <td>'.$row['name'].'</td>
                 <td>'.$row['address'].'</td>
                 <td>
-                <a href="SupplierController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
-                <a href="SupplierController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
+                <a href="SupplierController.php?cmd=edit&id='.md5($row['id']).'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
+                <a href="SupplierController.php?cmd=delete&id='.md5($row['id']).'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
                 </td></tr>
             ');
         }
