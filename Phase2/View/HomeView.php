@@ -22,7 +22,9 @@ class HomeView extends ViewAbst {
                     <ul>'
         );
         if ($logged) {
-            echo('<li><a href="..\Controller\DonorController.php?id='. $_SESSION['user_id'].'&cmd=myacc">My Account</a></li>');
+            echo('<li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=myacc">My Account</a></li>');
+            echo('<li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=viewdonations">My Donations</a></li>');
+
             echo('<li><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></li>');
             echo('<a href="..\Controller\CartController.php?cmd=showcart" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>');
         }
@@ -55,7 +57,7 @@ class HomeView extends ViewAbst {
                 <td>'.$row['description'].'</td>
             ');
             if ($logged)
-                echo('<td><a href="ProgramController.php?cmd=showtouser&id='.$row['id'].'">Donate</a></td>');
+                echo('<td><a href="ProgramController.php?cmd=showtouser&id='.md5($row['id']).'">Donate</a></td>'); 
             echo("</tr>");
         }
     }
