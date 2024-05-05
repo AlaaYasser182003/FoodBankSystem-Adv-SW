@@ -15,20 +15,30 @@ class ProgramModel extends ModifiableAbstModel {
 
     public function add() {
         global $pdo;
-        $sql = "INSERT INTO " . self::table . " (program_name, description) 
+        $sql = "INSERT INTO ".self::table." (program_name, description) 
         VALUES (:program, :description)";
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute(array(':program' => $this->program_name,
+        $stmt->execute(array(':program' => $this->program_name,
         ':description' => $this->description));
+        
+        $lastInsertedId = $pdo->lastInsertId();
+
+        $md5Hash = md5($lastInsertedId);
+        
+        $sql = "UPDATE ".self::table." SET programid = :md5Hash WHERE id = :lastInsertedId";
+        $stmt = $pdo->prepare($sql);
+       return  $stmt->execute(array(
+            ':md5Hash' => $md5Hash,
+            ':lastInsertedId' => $lastInsertedId
+        ));
     }
 
     public function read() {
         global $pdo;
-        $sql = "SELECT * FROM " . self::table . " WHERE id = :id";
+        $sql = "SELECT * FROM " . self::table . " WHERE programid = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $this->id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
         $this->program_name = $row['program_name'];
         $this->description = $row['description'];
         return 1;
@@ -37,7 +47,7 @@ class ProgramModel extends ModifiableAbstModel {
     public function edit() {
         global $pdo;
         $sql = "UPDATE " . self::table . " SET 
-        program_name = :program, description = :description WHERE id = :id";
+        program_name = :program, description = :description WHERE programid = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $this->id,
         'program' => $this->program_name,
@@ -46,7 +56,7 @@ class ProgramModel extends ModifiableAbstModel {
 
    public static function remove($id) {
         global $pdo;
-        $sql = "DELETE FROM " . self::table . " WHERE id = :id";
+        $sql = "DELETE FROM " . self::table . " WHERE programid = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $id]);
     }
