@@ -19,15 +19,28 @@ class DonationDetailsModel extends ModifiableAbstModel {
 
     public function add() {
         global $pdo;
+        
+        // First, insert the supplier record
         $sql = "INSERT INTO ".self::table." (donation_id, item_id, Qty, price) 
         VALUES (:donation, :item, :qty, :price)";
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare($sql); 
         $stmt->execute(array(
-        ':donation' => $this->donation_id,
-        ':item' => $this->item_id,
-        ':qty' => $this->Qty,
-        ':price' => $this->price));
-        return 1;
+            ':donation' => $this->donation_id, //leeh de 3amla moshkela
+            ':item' => $this->item_id,
+            ':qty' => $this->Qty,
+            ':price' => $this->price));
+       
+        $lastInsertedId = $pdo->lastInsertId();
+
+        $md5Hash = md5($lastInsertedId);
+        
+        $sql = "UPDATE ".self::table." SET dd_id = :md5Hash WHERE id = :lastInsertedId";
+        $stmt = $pdo->prepare($sql);
+       return  $stmt->execute(array(
+            ':md5Hash' => $md5Hash,
+            ':lastInsertedId' => $lastInsertedId
+        ));
+       
     }
 
     public function read() {
@@ -73,8 +86,20 @@ class DonationDetailsModel extends ModifiableAbstModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function view_all_donor($donor_id) {
+        global $pdo;
+        $sql = "SELECT donation_details.* 
+                FROM ".self::table."
+                INNER JOIN donations ON donations.donationid = donation_details.donation_id
+                WHERE donations.donor_id = :donor_id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['donor_id' => $donor_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
     public function setDonationId($id){
-        $this->donation_id_id=$id;
+        $this->donation_id=$id;
     }
     public function setItemId($itemid){
         $this->item_id=$itemid;
