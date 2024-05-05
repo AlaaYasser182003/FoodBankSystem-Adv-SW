@@ -188,8 +188,10 @@ class DonorView extends ViewAbst{
                 <h1>Donation Database</h1>
                 <nav>
                     <ul>
-                        <li><a href="../View/dashboard.php">Dashboard</a></li>
-                        <li><a href="../Controller/DonationController.php?cmd=viewAll">Back</a></li>
+                        <li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=myacc">My Account</a></li>
+                        <li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=viewdonations">My Donations</a></li>
+                        <li><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></li>
+                        <a href="..\Controller\CartController.php?cmd=showcart" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                     </ul>
                 </nav>
         </header>
