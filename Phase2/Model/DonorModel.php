@@ -27,17 +27,28 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
         $sql = "INSERT INTO ".self::table." (username, birthdate, email, password, phone_number, gender) 
         VALUES (:username, :birthdate, :email, :password, :phonenumber, :gender)";
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute(array(':username' => $this->username,
+        $stmt->execute(array(':username' => $this->username,
         ':birthdate' => $this->birthdate,
         ':email' => $this->email,
         ':password' => $this->password,
         ':phonenumber' => $this->phone_number,
         ':gender' => $this->gender));
+        
+        $lastInsertedId = $pdo->lastInsertId();
+
+        $md5Hash = md5($lastInsertedId);
+        
+        $sql = "UPDATE ".self::table." SET donorid = :md5Hash WHERE id = :lastInsertedId";
+        $stmt = $pdo->prepare($sql);
+       return  $stmt->execute(array(
+            ':md5Hash' => $md5Hash,
+            ':lastInsertedId' => $lastInsertedId
+        ));
     }
 
     public function read() {
         global $pdo;
-        $sql = "SELECT * FROM ".self::table." WHERE id = :id";
+        $sql = "SELECT * FROM ".self::table." WHERE donorid = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $this->id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -55,7 +66,7 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
         global $pdo;
         $sql = "UPDATE ".self::table." SET username = :username, birthdate = :birthdate,
         email = :email, password = :password, phone_number = :phonenumber,
-        gender = :gender WHERE id = :id";
+        gender = :gender WHERE donorid = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $this->id,
         'username' => $this->username,
@@ -97,12 +108,12 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
     static function login($Username, $Password){
         global $pdo;
         try {
-            $stmt = $pdo->prepare('SELECT * FROM donor WHERE username = :username');
+            $stmt = $pdo->prepare('SELECT * FROM donor WHERE username = :username;');
             $stmt->execute(['username' => $Username]);
             
             $donor = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($donor) {
-                $pass = $donor['password'];
+                $pass = ($donor['password']);
                 if ($pass === $Password) {
                     $_SESSION['user_id'] = $donor['id'];
                     $_SESSION['username'] = $donor['username'];
