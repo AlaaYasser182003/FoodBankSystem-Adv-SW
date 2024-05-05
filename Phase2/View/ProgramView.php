@@ -54,8 +54,8 @@ class ProgramView extends ViewAbst {
                     <td>'.$row['program_name'].'</td>
                     <td>'.$row['description'].'</td>
                     <td>
-                    <a href="ProgramController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
-                    <a href="ProgramController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
+                    <a href="ProgramController.php?cmd=edit&id='.md5($row['id']).'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
+                    <a href="ProgramController.php?cmd=delete&id='.md5($row['id']).'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
                     </td></tr>
                 ');
             }
@@ -126,7 +126,7 @@ class ProgramView extends ViewAbst {
                     <nav>
                         <ul>
                             <li><a href="..\Controller\HomeController.php">Home</a></li>
-                            <li><a href="..\Controller\DonorController.php?id='. $_SESSION['user_id'].'&cmd=myacc">My Account</a></li>
+                            <li><a href="..\Controller\DonorController.php?id='. md5($_SESSION['user_id']).'&cmd=myacc">My Account</a></li>
                         </ul>
                     </nav>
                 </header>
@@ -138,7 +138,9 @@ class ProgramView extends ViewAbst {
                     <select name = "item">');
         foreach($stmt as $row){
             $ItemModel = new ItemModel();
-            $ItemModel->getById($row['id']);
+            $ItemModel->setId(md5($row['id']));  
+            $ItemModel->getById(md5($row['id']));
+           
             echo('<option value="'.$ItemModel->getId().'">'.$ItemModel->getItemName().'</option>');
         }            
               echo('     
@@ -147,7 +149,7 @@ class ProgramView extends ViewAbst {
                 <input type="number" id="quantity" name="quantity" required> 
                 <br><br>
                 <input type="hidden" name="program_name" value="'.$program->getProgramName().'">
-                <input type="hidden" name="program_id" value="'.$program->getId().'">
+                <input type="hidden" name="program_id" value="'.md5($program->getId()).'">
                 <input type="submit" value="Add to Cart">
                 </form>
                 <p class="Checkout-link"><a href="..\Controller\CartController.php?cmd=showcart">Donate</a></p>
