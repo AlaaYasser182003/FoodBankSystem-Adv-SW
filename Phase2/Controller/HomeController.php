@@ -10,7 +10,7 @@ if (!isset($_GET['cmd'])) {
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['username'];
-        $password = $_POST['password'];
+        $password = sha1($_POST['password']);
         $logged = DonorModel::login($username, $password);
         if ($logged)
             header("Location: ../Controller/HomeController.php");
@@ -34,7 +34,7 @@ else {
 
     if ($command == 'login'){
         $error = ( (isset($_SESSION['error'])) ? $_SESSION['error'] : null); 
-        $homeView->ShowLogin($error);
+        $homeView->ShowLogin($error); 
     }
 
     else if ($command == 'logout') {
