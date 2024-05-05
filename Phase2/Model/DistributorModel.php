@@ -15,16 +15,31 @@ class DistributorModel extends ModifiableAbstModel {
 
     public function add() {
         global $pdo;
+        
         $sql = "INSERT INTO ".self::table." (name, address) 
-        VALUES (:name, :address)";
+                VALUES (:name, :address)";
         $stmt = $pdo->prepare($sql);
-        return $stmt->execute(array(':name' => $this->name,
-        'address' => $this->address ));
+        $stmt->execute(array(
+            ':name' => $this->name,
+            ':address' => $this->address
+        ));
+        
+        $lastInsertedId = $pdo->lastInsertId();
+
+        $md5Hash = md5($lastInsertedId);
+        
+        $sql = "UPDATE ".self::table." SET distributorid = :md5Hash WHERE id = :lastInsertedId";
+        $stmt = $pdo->prepare($sql);
+       return  $stmt->execute(array(
+            ':md5Hash' => $md5Hash,
+            ':lastInsertedId' => $lastInsertedId
+        ));
     }
+
 
     public function read() {
         global $pdo;
-        $sql = "SELECT * FROM ".self::table." WHERE id = :id";
+        $sql = "SELECT * FROM ".self::table." WHERE distributorid = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id' => $this->id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -35,7 +50,7 @@ class DistributorModel extends ModifiableAbstModel {
 
     public function edit() {
         global $pdo;
-        $sql = "UPDATE ".self::table." SET name = :name, address = :address  WHERE id = :id";
+        $sql = "UPDATE ".self::table." SET name = :name, address = :address  WHERE distributorid = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute([
             'id' => $this->id,
@@ -46,7 +61,7 @@ class DistributorModel extends ModifiableAbstModel {
 
    public static function remove($id) {  
         global $pdo;
-        $sql = "DELETE FROM ".self::table." WHERE id = :id";
+        $sql = "DELETE FROM ".self::table." WHERE distributorid = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $id]);
     } 
