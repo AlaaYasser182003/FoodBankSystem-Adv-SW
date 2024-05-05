@@ -22,6 +22,7 @@ class DonationsView extends ViewAbst{
                 <nav>
                     <ul>
                         <li><a href="../View/dashboard.php">Dashboard</a></li>
+                        <li><a href="../Controller/DonorController.php?cmd=viewAll&id=">Donors</a></li>
                     </ul>
                 </nav>
         </header>
@@ -49,7 +50,7 @@ class DonationsView extends ViewAbst{
                 <td>'. $row['total_cost'].'EGP</td>
                 <td>'. $row['donation_date'].'</td>
                 <td>
-                <a href="DonationDetailsController.php?cmd=viewDetails&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Details </a>
+                <a href="DonationDetailsController.php?cmd=viewDetails&id='.md5($row['id']).'" class="btn"> <i class="fas fa-edit"></i> Details </a>
             </td>
             </tr>');
         }
