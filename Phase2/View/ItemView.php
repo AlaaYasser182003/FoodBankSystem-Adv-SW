@@ -53,15 +53,15 @@ class ItemView extends ViewAbst{
          </thead>');
 
          
-         foreach($rows as $row)
+         foreach($rows as $row)               // should we display program name too to be more readable?
          echo('<tr>
          <td>'.$row['program_id'].'</td>
          <td>'.$row['item_name'].'</td>
          <td>'.$row['item_cost']."EGP".'</td>
          <td>'.$row['amount'].'</td>
          <td>
-         <a href="ItemController.php?cmd=edit&id='.$row['id'].'" class="btn"> <i class="fas fa-edit"></i> Edit </a>
-         <a href="ItemController.php?cmd=delete&id='.$row['id'].'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
+         <a href="ItemController.php?cmd=edit&id='.md5($row['id']).'" class="btn"> <i class="fas fa-edit"></i> Edit </a> 
+         <a href="ItemController.php?cmd=delete&id='.md5($row['id']).'" class="btn"> <i class="fas fa-trash"></i> Delete </a>
          </td>
      </tr>');
    }
