@@ -13,7 +13,7 @@ if ($command == 'viewAll') {
 else if ($command == 'edit' ) {
   
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $itemModel = new ItemModel(trim($_POST['program_id']), trim($_POST['item_name']), trim($_POST['item_cost']), trim($_POST['amount']));
+        $itemModel = new ItemModel(md5(trim($_POST['program_id'])), trim($_POST['item_name']), trim($_POST['item_cost']), trim($_POST['amount']));
         $itemModel->setId($_GET['id']);
         $itemView->ChangeItem($itemModel->edit()); 
     }
@@ -25,8 +25,8 @@ else if ($command == 'edit' ) {
 }
 
 else if ($command == 'add' && $_GET['cmd'] == $command) {
-    $itemModel = new ItemModel(trim($_POST['program_id']), trim($_POST['item_name']), trim($_POST['item_cost']), trim($_POST['amount']));
-    $itemView->ChangeItem($itemModel->add()); //hya eh change dehhh
+    $itemModel = new ItemModel(md5(trim($_POST['program_id'])), trim($_POST['item_name']), trim($_POST['item_cost']), trim($_POST['amount']));
+    $itemView->ChangeItem($itemModel->add()); 
 }
 
 else if ($command == 'delete')
