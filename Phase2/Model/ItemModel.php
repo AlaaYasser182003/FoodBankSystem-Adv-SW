@@ -19,29 +19,29 @@ class ItemModel extends ModifiableAbstModel {
     }
 
     public function add() {
-        global $pdo;
+
         $sql = "INSERT INTO ".self::table." (program_id, item_name, item_cost, amount) 
         VALUES (:program_id, :item_name, :item_cost, :amount)";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(array(':program_id' => $this->program_id,
         ':item_name' => $this->item_name,
         ':item_cost' => $this->item_cost,
         ':amount' => $this->amount ));
-        $lastInsertedId = $pdo->lastInsertId();
+        $lastInsertedId = Singleton::getpdo()->lastInsertId();
 
         $md5Hash = md5($lastInsertedId);
         
         $sql = "UPDATE ".self::table." SET itemid = :md5Hash WHERE id = :lastInsertedId";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
        return  $stmt->execute(array(
             ':md5Hash' => $md5Hash,
             ':lastInsertedId' => $lastInsertedId
         ));
     }
     public function read() {
-        global $pdo;
+
         $sql = "SELECT * FROM " . self::table . " WHERE itemid = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(['id' => $this->id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -53,10 +53,10 @@ class ItemModel extends ModifiableAbstModel {
     }
 
     public function edit() {
-        global $pdo;
+
         $sql = "UPDATE " . self::table . " SET program_id = :program_id, item_name = :Iname, item_cost = :cost,
         amount = :amount  WHERE itemid = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         return $stmt->execute([
             'id' => $this->id,
             'program_id' => $this->program_id,
@@ -67,22 +67,22 @@ class ItemModel extends ModifiableAbstModel {
     }
 
    public static function remove($id) {
-        global $pdo;
+
         $sql = "DELETE FROM " . self::table . " WHERE itemid = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         return $stmt->execute(['id' => $id]);
     } 
 
     public static function view_all(){
-        global $pdo;
-        $stmt = $pdo->query("SELECT * FROM " . self::table );
+
+        $stmt = Singleton::getpdo()->query("SELECT * FROM " . self::table );
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function view_all_id($id){
-        global $pdo;
+
         $sql = "SELECT * FROM ".self::table." WHERE program_id = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(['id' => $id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

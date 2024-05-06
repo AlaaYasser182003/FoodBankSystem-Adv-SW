@@ -18,24 +18,24 @@ class DonationDetailsModel extends ModifiableAbstModel {
     }
 
     public function add() {
-        global $pdo;
+        
         
         // First, insert the supplier record
         $sql = "INSERT INTO ".self::table." (donation_id, item_id, Qty, price) 
         VALUES (:donation, :item, :qty, :price)";
-        $stmt = $pdo->prepare($sql); 
+        $stmt = Singleton::getpdo()->prepare($sql); 
         $stmt->execute(array(
             ':donation' => $this->donation_id, //leeh de 3amla moshkela
             ':item' => $this->item_id,
             ':qty' => $this->Qty,
             ':price' => $this->price));
        
-        $lastInsertedId = $pdo->lastInsertId();
+        $lastInsertedId = Singleton::getpdo()->lastInsertId();
 
         $md5Hash = md5($lastInsertedId);
         
         $sql = "UPDATE ".self::table." SET dd_id = :md5Hash WHERE id = :lastInsertedId";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
        return  $stmt->execute(array(
             ':md5Hash' => $md5Hash,
             ':lastInsertedId' => $lastInsertedId
@@ -44,9 +44,9 @@ class DonationDetailsModel extends ModifiableAbstModel {
     }
 
     public function read() {
-        global $pdo;
+        
         $sql = "SELECT * FROM ".self::table." WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(['id' => $this->id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->donation_id = $row['donation_id'];
@@ -57,42 +57,41 @@ class DonationDetailsModel extends ModifiableAbstModel {
     }
 
     public function edit() {
-        global $pdo;
+        
         $sql = "UPDATE ".self::table." SET donation_id = :donation, item_id = :item,
         Qty = :qty, price = :price WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         return $stmt->execute(['id' => $this->id, 'donation' => $this->donation_id,
         'item' => $this->item_id, 'qty' => $this->Qty, 'price' => $this->price]);
     }
 
    public static function remove($id) {
-        global $pdo;
+        
         $sql = "DELETE FROM ".self::table." WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         return $stmt->execute(['id' => $id]);
     }
 
     public static function view_all_id($id){
-        global $pdo;
+        
         $sql = "SELECT * FROM ".self::table." WHERE donation_id = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(['id' => $id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function view_all(){
-        global $pdo;
-        $stmt = $pdo->query("SELECT * FROM ".self::table);
+        
+        $stmt = Singleton::getpdo()->query("SELECT * FROM ".self::table);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function view_all_donor($donor_id) {
-        global $pdo;
         $sql = "SELECT donation_details.* 
                 FROM ".self::table."
                 INNER JOIN donations ON donations.donationid = donation_details.donation_id
                 WHERE donations.donor_id = :donor_id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(['donor_id' => $donor_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

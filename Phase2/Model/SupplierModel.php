@@ -14,22 +14,21 @@ class SupplierModel extends ModifiableAbstModel {
     }
 
     public function add() {
-        global $pdo;
         
         $sql = "INSERT INTO ".self::table." (name, address) 
                 VALUES (:name, :address)";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(array(
             ':name' => $this->name,
             ':address' => $this->address
         ));
         
-        $lastInsertedId = $pdo->lastInsertId();
+        $lastInsertedId = Singleton::getpdo()->lastInsertId();
 
         $md5Hash = md5($lastInsertedId);
         
         $sql = "UPDATE ".self::table." SET supplierid = :md5Hash WHERE id = :lastInsertedId";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
        return  $stmt->execute(array(
             ':md5Hash' => $md5Hash,
             ':lastInsertedId' => $lastInsertedId
@@ -38,9 +37,8 @@ class SupplierModel extends ModifiableAbstModel {
     
 
     public function read() {
-        global $pdo;
         $sql = "SELECT * FROM ".self::table." WHERE supplierid = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         $stmt->execute(['id' => $this->id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->address = $row['address'];
@@ -49,9 +47,9 @@ class SupplierModel extends ModifiableAbstModel {
     }
 
     public function edit() {
-        global $pdo;
+
         $sql = "UPDATE ".self::table." SET name = :name, address = :address  WHERE supplierid = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         return $stmt->execute([
             'id' => $this->id,
             'name' => $this->name,
@@ -60,15 +58,15 @@ class SupplierModel extends ModifiableAbstModel {
     }
 
    public static function remove($id) {  
-        global $pdo;
+
         $sql = "DELETE FROM ".self::table." WHERE supplierid = :id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = Singleton::getpdo()->prepare($sql);
         return $stmt->execute(['id' => $id]);
     } 
 
     public static function view_all(){
-        global $pdo;
-        $stmt = $pdo->query("SELECT * FROM ". self::table);
+
+        $stmt = Singleton::getpdo()->query("SELECT * FROM ". self::table);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
