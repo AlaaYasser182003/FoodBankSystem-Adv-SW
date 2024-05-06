@@ -40,8 +40,8 @@ if ($command == 'myacc' && $id !== null)
   if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
     session_start();
-    $donorModel = new DonorModel($_POST['username'], $_POST['birthdate'],
-      $_POST['email'], sha1($_POST['password']), $_POST['phone'], $_POST['gender']);   // 
+    $donorModel = new DonorModel($_SESSION['user_id'], $_POST['birthdate'],
+      $_POST['email'], "", $_POST['phone'], $_POST['gender']);   // 
     $donorModel->setId(md5($_SESSION['user_id']));
     $donorModel->edit();
     header("Location: HomeController.php");
@@ -68,7 +68,8 @@ if ($command == 'viewdonations') {
     $donorView->ShowMyDD($stmt, $donorModel);
 }
 
-
-
-
-
+if ($command == 'viewAll') {
+   
+  $stmt = DonorModel::view_all();
+  $donorView->ShowDonorsTable($stmt);
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2024 at 06:24 PM
+-- Generation Time: May 05, 2024 at 11:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,13 +64,7 @@ CREATE TABLE `donations` (
 --
 
 INSERT INTO `donations` (`id`, `total_cost`, `donation_date`, `donationid`, `donor_id`) VALUES
-(1, 800, '2024-03-22', 'c4ca4238a0b923820dcc509a6f75849b', 'c4ca4238a0b923820dcc509a6f75849b'),
-(2, 500, '2024-05-04', 'c81e728d9d4c2f636f067f89cc14862c', '8f14e45fceea167a5a36dedd4bea2543'),
-(5, 500, '2024-05-04', 'e4da3b7fbbce2345d7772b0674a318d5', '8f14e45fceea167a5a36dedd4bea2543'),
-(41, 500, '2024-05-05', '3416a75f4cea9109507cacd8e2f2aefc', '8f14e45fceea167a5a36dedd4bea2543'),
-(51, 500, '2024-05-05', '2838023a778dfaecdc212708f721b788', '8f14e45fceea167a5a36dedd4bea2543'),
-(52, 100, '2024-05-05', '9a1158154dfa42caddbd0694a4e9bdc8', '8f14e45fceea167a5a36dedd4bea2543'),
-(53, 1000, '2024-05-05', 'd82c8d1619ad8176d665453cfb2e55f0', '8f14e45fceea167a5a36dedd4bea2543');
+(1, 2100, '2024-05-05', 'c4ca4238a0b923820dcc509a6f75849b', 'c9f0f895fb98ab9159f51fd0297e236d');
 
 -- --------------------------------------------------------
 
@@ -92,12 +86,8 @@ CREATE TABLE `donation_details` (
 --
 
 INSERT INTO `donation_details` (`id`, `Qty`, `price`, `dd_id`, `item_id`, `donation_id`) VALUES
-(1, 3, 300, 'c4ca4238a0b923820dcc509a6f75849b', 'c81e728d9d4c2f636f067f89cc14862c', NULL),
-(2, 1, 500, 'c81e728d9d4c2f636f067f89cc14862c', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', NULL),
-(3, 1, 500, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', NULL),
-(48, 1, 500, '642e92efb79421734881b53e1e1b18b6', 'c4ca4238a0b923820dcc509a6f75849b', '3416a75f4cea9109507cacd8e2f2aefc'),
-(49, 1, 100, 'f457c545a9ded88f18ecee47145a72c0', 'c81e728d9d4c2f636f067f89cc14862c', '3416a75f4cea9109507cacd8e2f2aefc'),
-(50, 2, 500, 'c0c7c76d30bd3dcaefc96f40275bdc0a', 'c4ca4238a0b923820dcc509a6f75849b', '3416a75f4cea9109507cacd8e2f2aefc');
+(1, 1, 100, 'c4ca4238a0b923820dcc509a6f75849b', 'c81e728d9d4c2f636f067f89cc14862c', 'c4ca4238a0b923820dcc509a6f75849b'),
+(2, 4, 500, 'c81e728d9d4c2f636f067f89cc14862c', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'c4ca4238a0b923820dcc509a6f75849b');
 
 -- --------------------------------------------------------
 
@@ -121,13 +111,14 @@ CREATE TABLE `donor` (
 --
 
 INSERT INTO `donor` (`id`, `username`, `birthdate`, `email`, `password`, `phone_number`, `gender`, `donorid`) VALUES
-(1, 'Aya', '1992-08-25', 'aya17@hotmail.com', 'ohyeah', '01098765432', 1, 'c4ca4238a0b923820dcc509a6f75849b'),
-(2, 'Youssef', '1985-12-10', 'youssefH@gmail.com', 'youssef_pass', '01198765432', 0, 'c81e728d9d4c2f636f067f89cc14862c'),
-(3, 'Nour', '1998-04-03', 'nourBassel22@gmail.com', 'nour123', '01298765432', 1, 'eccbc87e4b5ce2fe28308fd9f2a7baf3'),
-(4, 'Ahmed', '1990-05-15', 'ahmedelwazeer90@hotmail.com', 'password123', '01012345678', 0, 'a87ff679a2f3e71d9181a67b7542122c'),
-(5, 'Fatma', '1988-10-20', 'fatmawaked19@gmail.com', 'fatma_password', '01123456789', 1, 'e4da3b7fbbce2345d7772b0674a318d5'),
-(6, 'Mohamed', '1995-03-08', 'mohamed6677@gmail.com', 'mohamed_pass', '01234567890', 0, '1679091c5a880faf6fb5e6087eb1b2dc'),
-(7, 'alaa2003', '2003-10-18', 'alaay318@gmail.com', '551dcdc16748c3db1bb1f97136622d048d855186', '01099155389', 1, '8f14e45fceea167a5a36dedd4bea2543');
+(1, 'Aya', '1992-08-25', 'aya17@hotmail.com', '35e9a3f0dab724451bd956db409c2c9e96f795c9', '01098765432', 1, 'c4ca4238a0b923820dcc509a6f75849b'),
+(2, 'Youssef', '1985-12-10', 'youssefH@gmail.com', '85aa942b709a86f6b5d8a572444a09d993fbf266', '01198765432', 0, 'c81e728d9d4c2f636f067f89cc14862c'),
+(3, 'Nour', '1998-04-03', 'nourBassel22@gmail.com', 'f3e7bf682ec4c9f04bbc29f2c884dea9d2b30cb5', '01298765432', 1, 'eccbc87e4b5ce2fe28308fd9f2a7baf3'),
+(4, 'Ahmed', '1990-05-15', 'ahmedelwazeer90@hotmail.com', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', '01012345678', 0, 'a87ff679a2f3e71d9181a67b7542122c'),
+(5, 'Fatma', '1988-10-20', 'fatmawaked19@gmail.com', '5e927503d30f50bd44c9a31c6625984c442b78ae', '01123456789', 1, 'e4da3b7fbbce2345d7772b0674a318d5'),
+(6, 'Mohamed', '1995-03-08', 'mohamed6677@gmail.com', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', '01234567890', 0, '1679091c5a880faf6fb5e6087eb1b2dc'),
+(7, 'alaa2003', '2003-10-18', 'alaay318@gmail.com', '551dcdc16748c3db1bb1f97136622d048d855186', '01099155389', 1, '8f14e45fceea167a5a36dedd4bea2543'),
+(8, 'Omar', '1999-04-19', 'omar12@yahoo.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '01011111122', 0, 'c9f0f895fb98ab9159f51fd0297e236d');
 
 -- --------------------------------------------------------
 
@@ -154,8 +145,7 @@ INSERT INTO `item` (`id`, `item_name`, `item_cost`, `amount`, `program_id`, `ite
 (3, 'Gaza family box', 500, 1080, 'e4da3b7fbbce2345d7772b0674a318d5', 'eccbc87e4b5ce2fe28308fd9f2a7baf3'),
 (4, 'kafara meal', 65, 1000, 'a87ff679a2f3e71d9181a67b7542122c', 'a87ff679a2f3e71d9181a67b7542122c'),
 (5, 'Sheep', 8500, 200, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'e4da3b7fbbce2345d7772b0674a318d5'),
-(6, 'Calf', 20000, 170, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', '1679091c5a880faf6fb5e6087eb1b2dc'),
-(9, 'test', 40, 12, 'c4ca4238a0b923820dcc509a6f75849b', '45c48cce2e2d7fbdea1afc51c7c6ad26');
+(6, 'Calf', 20000, 170, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', '1679091c5a880faf6fb5e6087eb1b2dc');
 
 -- --------------------------------------------------------
 
@@ -267,43 +257,43 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `distributor`
 --
 ALTER TABLE `distributor`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `donation_details`
 --
 ALTER TABLE `donation_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

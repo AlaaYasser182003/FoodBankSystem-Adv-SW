@@ -64,15 +64,13 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
 
     public function edit() {
         global $pdo;
-        $sql = "UPDATE ".self::table." SET username = :username, birthdate = :birthdate,
-        email = :email, password = :password, phone_number = :phonenumber,
+        $sql = "UPDATE ".self::table." SET birthdate = :birthdate,
+        email = :email, phone_number = :phonenumber,
         gender = :gender WHERE donorid = :id";
         $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $this->id,
-        'username' => $this->username,
         'birthdate' => $this->birthdate,
         'email' => $this->email,
-        'password' => $this->password,
         'phonenumber' => $this->phone_number,
         'gender' => $this->gender]);
     }    

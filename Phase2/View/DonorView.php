@@ -146,20 +146,22 @@ class DonorView extends ViewAbst{
             <div class="admin-object-form-container centered">
             <form action="" method="post">
                 <h3 class="title">My Account</h3>
-                <input type="text" class="box" name="username" value="'.$donor->getUserName().'" placeholder="enter your username" required>
-                <input type="password" class="box" name="password" placeholder="enter the new password" required>
                 <input type="date" min="0" class="box" name="birthdate" value="'.$donor->getBirthdate().'" placeholder="enter your birthdate" required>
                 <input type="text" min="0" class="box" name="email" value="'.$donor->getEmail().'" placeholder="enter your email" required>
                 <input type="text" min="0" class="box" name="phone" value="'.$donor->getPhoneNumber().'" placeholder="enter your phone number" required>
                 <div class="gender-option">
                     <div class="gender">
                         <br/><label for="check" class="box">Male</label>
-                        <input type="radio" id="male" name="gender" value="'.GenderEnum::Male->value.'" required/>
-                    </div> 
-                    <div class="gender">
-                        <br/><br/><label for="check" class="box">Female</label>
-                        <input type="radio" id="female" name="gender" value="'.GenderEnum::Female->value.'" required/>
-                    </div> 
+                        <input type="radio" id="male" name="gender" value="'.GenderEnum::Male->value.'" required ');
+                if ($donor->getGender() == GenderEnum::Male->value)
+                    echo(' checked');
+                echo('/></div> 
+                        <div class="gender">
+                            <br/><br/><label for="check" class="box">Female</label>
+                            <input type="radio" id="female" name="gender" value="'.GenderEnum::Female->value.'" required ');
+                if ($donor->getGender() == GenderEnum::Female->value)
+                    echo(' checked');
+                echo('/></div> 
                 </div>
                 <br/><input type="submit" value="Update" name="update_distributor" class="btn">
                 <a href="../Controller/HomeController.php" class="btn">Cancel</a>
@@ -188,8 +190,10 @@ class DonorView extends ViewAbst{
                 <h1>Donation Database</h1>
                 <nav>
                     <ul>
-                        <li><a href="../View/dashboard.php">Dashboard</a></li>
-                        <li><a href="../Controller/DonationController.php?cmd=viewAll">Back</a></li>
+                        <li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=myacc">My Account</a></li>
+                        <li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=viewdonations">My Donations</a></li>
+                        <li><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></li>
+                        <a href="..\Controller\CartController.php?cmd=showcart" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                     </ul>
                 </nav>
         </header>
@@ -231,5 +235,3 @@ class DonorView extends ViewAbst{
     
 
    
-
-
