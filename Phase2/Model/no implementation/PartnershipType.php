@@ -1,6 +1,6 @@
 <?php
 
-abstract class PartnershipType {
-    const Supplier = "Supplier";
-    const Distributor = "Distributor";
+enum PartnershipType : int {
+    case Supplier = 0;
+    case Distributor = 1;
 }

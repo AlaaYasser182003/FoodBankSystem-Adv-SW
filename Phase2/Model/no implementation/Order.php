@@ -1,5 +1,5 @@
 <?php
-require_once "../item.php";
+require_once "../itemModel.php";
 require_once "OrderStatus.php";
 Class Order{
     private $orderIdD;
@@ -12,18 +12,18 @@ Class Order{
     }
 
     public function getStatus() : OrderStatus{
-
+        return $this->status;
     }
 
     public function getOrderID() : int{
+        return $this->orderIdD;
+    }
+
+    public function addltem(ItemModel $Item) : void{
 
     }
 
-    public function addltem(item $Item) : void{
-
-    }
-
-    public function removeltem(Item $item) : void{
+    public function removeltem(ItemModel $item) : void{
 
     }
 

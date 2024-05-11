@@ -50,6 +50,10 @@ class Employee extends User implements IVerifiable{
     public function enrollInInsurance(): void {
         
     }
+
+    public function login($Username, $Password) {
+        
+    }
 }
 
 

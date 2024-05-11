@@ -2,7 +2,7 @@
 require_once "PartnershipType.php";
 require_once "../imodifiableModel.php";
 require_once "../pdo.php";
-class Partnership implements IModifiable{
+abstract class Partnership implements ImodifiableModel{
     private $partnershipID;
     private $name;
     private $location;
@@ -54,26 +54,5 @@ class Partnership implements IModifiable{
 
     public function getLocation(): string {
         return $this->location;
-    }
-
-    
-    public function add(){
-
-    }
-
-    public function edit(){
-
-    }
-
-    public function read(){
-
-    }
-
-    public function remove(){
-
-    }
-
-    public function view_all(){
-
     }
 }

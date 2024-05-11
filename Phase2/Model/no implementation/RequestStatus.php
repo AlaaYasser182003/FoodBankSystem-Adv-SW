@@ -1,7 +1,7 @@
 <?php
 
-abstract class RequestStatus {
-    const Processing = "Processing";
-    const Accepted = "Accepted";
-    const Refused = "Refused";
+enum RequestStatus : int {
+    case Processing = 0;
+    case Accepted = 1;
+    case Refused = 2;
 }

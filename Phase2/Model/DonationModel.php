@@ -1,6 +1,7 @@
 <?php
 require_once "pdo.php";
 require_once "ModifiableAbstModel.php";
+include_once "/no implementation/Reciept.php";
 
 class DonationModel extends ModifiableAbstModel {
 
@@ -8,6 +9,7 @@ class DonationModel extends ModifiableAbstModel {
     private $donor_id;
     private $total_cost;
     private $donation_date;
+    private $receipt;
 
     public function __construct($donor_id = "", $total_cost = 0, $donation_date = "") {
         $this->donor_id = $donor_id;
@@ -144,5 +146,31 @@ public static function getDonationId($donor_id, $donation_date) {
     public static function getLastInsertedId() {
          // Assuming Singleton::getpdo() is your database connection object
         return Singleton::getpdo()->lastInsertId();
+    }
+
+    //Not Implemented//
+    public function setReceiptInfo(Receipt $r): void {
+        $this->receipt = $r;
+    }
+
+    
+    public function sendConfirmationEmail(): bool {
+        
+    }
+
+    public function sendReceiptToDonor(Receipt $r): void {
+        
+    }
+
+    public function displayReceipt(Receipt $r): void {
+        
+    }
+
+    public function exportToFormat(Receipt $r): void {
+        
+    }
+
+    public function getReceiptID(Receipt $r): string {
+        return $r->receiptID;
     }
 }

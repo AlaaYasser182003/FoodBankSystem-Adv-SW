@@ -1,8 +1,8 @@
 <?php
 
-abstract class Roles {
-    const Procurement = "Procurement";
-    const Warehouse = "Warehouse";
-    const Program = "Program";
-    const Executive = "Executive";
+enum Roles : int {
+    case Procurement = 0;
+    case Warehouse = 1;
+    case Program = 2;
+    case Executive = 3;
 }

@@ -1,7 +1,7 @@
 <?php
 
-abstract class OrderStatus {
-    const Received = "received";
-    const Placed = "placed";
-    const InProgress = "inprogress";
+enum OrderStatus : int {
+    case Received = 0;
+    case Placed = 1;
+    case InProgress = 2;
 }
