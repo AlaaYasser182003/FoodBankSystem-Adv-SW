@@ -2,35 +2,53 @@
 require_once "../Model/SupplierModel.php";
 require_once "../View/SupplierView.php";
 
+class SupplierController {
+    public $suppView;
+    function __construct() {
+        $this->suppView = new SupplierView();
+    }
+    public function addController() {
+        $suppModel = new SupplierModel(trim($_POST['name']), trim($_POST['address']));
+        $this->suppView->ChangeSupplier($suppModel->add());
+    }
+    public function deleteController() {
+        $this->suppView->ChangeSupplier(SupplierModel::remove($_GET['id']));
+    }
+    public function view_allController() {
+        $stmt = SupplierModel::view_all();
+        $this->suppView->ShowSuppliersTable($stmt);
+    }
 
+    public function editController() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $suppModel = new SupplierModel(trim($_POST['name']), trim($_POST['address']));
+            $suppModel->setId($_GET['id']);
+            $this->suppView->ChangeSupplier($suppModel->edit());
+        }
+        else {
+            $suppModel = new SupplierModel();
+            $suppModel->getById($_GET['id']);
+            $this->suppView->EditSupplier($suppModel);
+        }
+    }
+}
+
+$controller = new SupplierController();
 $command = $_GET['cmd'];
-$suppView = new SupplierView();
 
 if ($command == 'viewAll') {
-    $stmt = SupplierModel::view_all();
-    $suppView->ShowSuppliersTable($stmt);
+    $controller->view_allController();
 }
 
 else if ($command == 'edit') {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $suppModel = new SupplierModel(trim($_POST['name']), trim($_POST['address']));
-        $suppModel->setId($_GET['id']);
-        $suppView->ChangeSupplier($suppModel->edit());
-    }
-    else {
-        $suppModel = new SupplierModel();
-        $suppModel->getById($_GET['id']);
-        $suppView->EditSupplier($suppModel);
-    }
+    $controller->editController();
 }
 
 else if ($command == 'add' && $_POST['cmd'] == $command) {
-    $suppModel = new SupplierModel(trim($_POST['name']), trim($_POST['address']));
-    $suppView->ChangeSupplier($suppModel->add());
+    $controller->addController();
 }
 
 else if ($command == 'delete')
-    $suppView->ChangeSupplier(SupplierModel::remove($_GET['id']));
+    $controller->deleteController();
 
-$suppView->PrintFooter();
-
+$controller->suppView->PrintFooter();

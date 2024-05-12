@@ -1,7 +1,7 @@
 <?php
 require_once "pdo.php";
 require_once "ModifiableAbstModel.php";
-include_once "/no implementation/Reciept.php";
+include_once "../Model/no implementation/Receipt.php";
 
 class DonationModel extends ModifiableAbstModel {
 
@@ -172,5 +172,13 @@ public static function getDonationId($donor_id, $donation_date) {
 
     public function getReceiptID(Receipt $r): string {
         return $r->receiptID;
+    }
+
+    public static function getByHash($hash) {
+        $sql = "SELECT id FROM ".self::table." WHERE donationid = :id";
+        $stmt = Singleton::getpdo()->prepare($sql);
+        $stmt->execute(['id' => $hash]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['id'];
     }
 }

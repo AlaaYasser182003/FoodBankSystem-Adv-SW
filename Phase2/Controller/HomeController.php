@@ -3,50 +3,67 @@ require_once "../View/HomeView.php";
 require_once "../Model/ProgramModel.php";
 require_once "../Model/DonorModel.php";
 require_once "../Model/pdo.php";
-session_start();
 
-$homeView = new HomeView();
-if (!isset($_GET['cmd'])) {
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST['username'];
-        $password = sha1($_POST['password']);
-        $logged = DonorModel::login($username, $password);
-        if ($logged)
-            header("Location: ../Controller/HomeController.php");
-        else
-            header("Location: ../Controller/HomeController.php?cmd=login");
-        exit();
+class HomeController {
+    public $homeView;
+    function __construct() {
+        $this->homeView = new HomeView();
     }
-
-    else {
-        $stmt = ProgramModel::view_all();
-        if ( isset($_SESSION['user_id']) )
-            $homeView->ShowHome(true, $stmt, $_SESSION['username']);
-        else
-            $homeView->ShowHome(false, $stmt);
-    }
-    $homeView->PrintFooter();
-}
-
-else {
-    $command = $_GET['cmd'];
-
-    if ($command == 'login'){
+    function login() {
         $error = ( (isset($_SESSION['error'])) ? $_SESSION['error'] : null); 
-        $homeView->ShowLogin($error); 
+        $this->homeView->ShowLogin($error);
     }
-
-    else if ($command == 'logout') {
+    function logout() {
         session_destroy();
         header("Location: ../Controller/HomeController.php");
         exit();
     }
 
-    else if ($command == 'signup') {
+    function signup() {
         header("Location: DonorController.php?cmd=add");
         exit();
     }
+    function home() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $username = $_POST['username'];
+            $password = sha1($_POST['password']);
+            $logged = DonorModel::login($username, $password);
+            if ($logged)
+                header("Location: ../Controller/HomeController.php");
+            else
+                header("Location: ../Controller/HomeController.php?cmd=login");
+            exit();
+        }
+    
+        else {
+            $stmt = ProgramModel::view_all();
+            if ( isset($_SESSION['user_id']) )
+                $this->homeView->ShowHome(true, $stmt, $_SESSION['username']);
+            else
+                $this->homeView->ShowHome(false, $stmt);
+        }
+        $this->homeView->PrintFooter();
+    }
 }
 
-//$homeView->PrintFooter();
+
+session_start();
+$controller = new HomeController();
+if (!isset($_GET['cmd'])) {
+    $controller->home();
+}
+
+else {
+    $command = $_GET['cmd'];
+    if ($command == 'login'){
+        $controller->login();
+    }
+    else if ($command == 'logout') {
+        $controller->logout();
+    }
+    else if ($command == 'signup') {
+        $controller->signup();   
+    }
+}
+
+//$controller->homeView->PrintFooter();

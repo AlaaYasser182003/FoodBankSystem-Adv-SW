@@ -3,43 +3,66 @@ require_once "..\Model\ProgramModel.php";
 require_once "..\View\ProgramView.php";
 require_once "..\Model\pdo.php";
 
+class ProgramController {
+    public $ProgView;
+    function __construct() {
+        $this->ProgView = new ProgramView();
+    }
+    public function addController() {
+        $ProgModel = new ProgramModel(trim($_POST['name']), trim($_POST['address']));
+        $this->ProgView->ChangeProgram($ProgModel->add());
+    }
+    public function deleteController() {
+        $this->ProgView->ChangeProgram(ProgramModel::remove($_GET['id']));
+    }
+    public function view_allController() {
+        $stmt = ProgramModel::view_all();
+        $this->ProgView->ShowProgramsTable($stmt);
+    }
+
+    public function editController() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ProgModel = new ProgramModel(trim($_POST['name']), trim($_POST['address']));
+            $ProgModel->setId($_GET['id']);
+            $this->ProgView->ChangeProgram($ProgModel->edit());
+        }
+        else {
+            $ProgModel = new ProgramModel();
+            $ProgModel->getById($_GET['id']);
+            $this->ProgView->EditProgram($ProgModel);
+        }
+    }
+    public function show_to_user() {
+        require_once "../Model/ItemModel.php";
+        $programModel = new ProgramModel();
+        $programkey = $_GET['id'];
+        $programModel->getById($programkey);
+        $stmt = ItemModel::view_all_id($programkey);
+        $this->ProgView->ShowProgramToUser($programModel,$stmt);
+    }
+}
+
 $command = $_GET['cmd'];
-$ProgView = new ProgramView();
+$controller = new ProgramController();
 
 if ($command == 'viewAll') {
-    $stmt = ProgramModel::view_all();
-    $ProgView->ShowProgramsTable($stmt);
+    $controller->view_allController();
 }
 
 else if ($command == 'edit') {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $ProgModel = new ProgramModel(trim($_POST['name']), trim($_POST['address']));
-        $ProgModel->setId($_GET['id']);
-        $ProgView->ChangeProgram($ProgModel->edit());
-    }
-    else {
-        $ProgModel = new ProgramModel();
-        $ProgModel->getById($_GET['id']);
-        $ProgView->EditProgram($ProgModel);
-    }
+    $controller->editController();
 }
 
 else if ($command == 'add' && $_POST['cmd'] == $command) {
-    $ProgModel = new ProgramModel(trim($_POST['name']), trim($_POST['address']));
-    $ProgView->ChangeProgram($ProgModel->add());
+    $controller->addController();
 }
 
 else if ($command == 'delete')
-    $ProgView->ChangeProgram(ProgramModel::remove($_GET['id']));
+    $controller->deleteController();
 
 if ($command == 'showtouser')
 {
-    require_once "../Model/ItemModel.php";
-    $programModel = new ProgramModel();
-    $programkey = $_GET['id'];
-    $programModel->getById($programkey);
-    $stmt = ItemModel::view_all_id($programkey);
-    $ProgView->ShowProgramToUser($programModel,$stmt);
+    $controller->show_to_user();
 }
 
-$ProgView->PrintFooter();
+$controller->ProgView->PrintFooter();

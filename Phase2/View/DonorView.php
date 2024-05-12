@@ -1,6 +1,7 @@
 <?php
 require_once "ViewAbst.php";
 require_once "../Model/DonorModel.php";
+require_once "../Model/DonationModel.php";
 require_once "../Model/ProgramModel.php";
 require_once "../Model/ItemModel.php";
 require_once "../Model/GenderEnum.php";
@@ -219,7 +220,7 @@ class DonorView extends ViewAbst{
             $programModel->getById($itemModel->getProgramID());
             echo('
             <tr>
-                <td>'. $row['donation_id'].'</td>
+                <td>'. DonationModel::getByHash($row['donation_id']).'</td>
                 <td>'.$obj->getUserName().'</td>
                 <td>'.$itemModel->getItemName().'</td>
                 <td>'.$programModel->getProgramName().'</td>

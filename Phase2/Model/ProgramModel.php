@@ -73,5 +73,12 @@ class ProgramModel extends ModifiableAbstModel {
     public function getProgramDescription(){
         return $this->description;
     }
+    public static function getByHash($hash) {
+        $sql = "SELECT id FROM ".self::table." WHERE programid = :id";
+        $stmt = Singleton::getpdo()->prepare($sql);
+        $stmt->execute(['id' => $hash]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['id'];
+    }
 }
 ?>

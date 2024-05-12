@@ -3,6 +3,7 @@ require_once "ViewAbst.php";
 require_once "../Model/DonationModel.php";
 require_once "../Model/ProgramModel.php";
 require_once "../Model/ItemModel.php";
+require_once "../Model/DonorModel.php";
 
 class DonationDetailsView extends ViewAbst {
     function ShowDonationDetailsTable($rows) {
@@ -51,8 +52,8 @@ class DonationDetailsView extends ViewAbst {
             $programModel->getById($itemModel->getProgramID());
             echo('
             <tr>
-                <td>'. $row['donation_id'].'</td>
-                <td>'. $row['item_id'].'</td>
+                <td>'. DonationModel::getByHash($row['donation_id']).'</td>
+                <td>'. ItemModel::getByHash($row['item_id']).'</td>
                 <td>'.$itemModel->getItemName().'</td>
                 <td>'.$programModel->getProgramName().'</td>
                 <td>'.$row['Qty'].'</td>
@@ -81,7 +82,7 @@ class DonationDetailsView extends ViewAbst {
                 <h1>Food Bank</h1>
             </header>
             <div class="container">
-            <h2>Donor ID: '.$donation->getDonorId().'</h2><br/>
+            <h2>Donor ID: '.DonorModel::getByHash($donation->getDonorId()).'</h2><br/>
             <h2>Total Cost: '.$donation->getTotalCost().'</h2></br>
             <h2>Donation Date: '.$donation->getDonationDate().'</h2><br/>
         ');
@@ -98,7 +99,7 @@ class DonationDetailsView extends ViewAbst {
             echo ('
             <tr>
                 <td>'.$row['id'].'</td>
-                <td>'.$row['item_id'].'</td>
+                <td>'.ItemModel::getByHash($row['item_id']).'</td>
                 <td>'.$row['Qty'].'</td>
                 <td>'.$row['Qty'] * $row['price'].'</td>
             </tr>

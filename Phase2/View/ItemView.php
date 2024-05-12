@@ -1,6 +1,7 @@
 <?php
 
 require_once "../View/ViewAbst.php";
+require_once "../Model/ProgramModel.php";
 
 class ItemView extends ViewAbst{
 
@@ -44,6 +45,7 @@ class ItemView extends ViewAbst{
       <table class="object-display-table">
          <thead>
          <tr>
+            <th>item ID</th>
             <th>program ID</th>
             <th>item name</th>
             <th>item cost</th>
@@ -55,7 +57,8 @@ class ItemView extends ViewAbst{
          
          foreach($rows as $row)               // should we display program name too to be more readable?
          echo('<tr>
-         <td>'.$row['program_id'].'</td>
+         <td>'.$row['id'].'</td>
+         <td>'.ProgramModel::getByHash($row['program_id']).'</td>
          <td>'.$row['item_name'].'</td>
          <td>'.$row['item_cost']."EGP".'</td>
          <td>'.$row['amount'].'</td>
@@ -108,7 +111,7 @@ class ItemView extends ViewAbst{
           <input type="text" class="box" name="item_name" value="'.$obj->getItemName().'" placeholder="enter item name">
           <input type="number" min="0" class="box" name="amount" value="'.$obj->getAmount().'" placeholder="enter amount">
           <input type="number" class="box" step="0.001" name="item_cost" value="'.$obj->getCost().'" placeholder="enter cost">
-          <input type="number" class="box" name="program_id" value="'.$obj->getProgramID().'" placeholder="enter program id">
+          <input type="number" class="box" name="program_id" value="'.ProgramModel::getByHash($obj->getProgramID()).'" placeholder="enter program id">
           <input type="submit" value="Update" name="update_item" class="btn">
           <a href="../Controller/ItemController.php?cmd=viewAll" class="btn">Cancel</a>
        </form>

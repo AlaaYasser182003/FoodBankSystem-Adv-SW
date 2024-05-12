@@ -174,5 +174,11 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
     {
         return $this->password;
     }
-
+    public static function getByHash($hash) {
+        $sql = "SELECT id FROM ".self::table." WHERE donorid = :id";
+        $stmt = Singleton::getpdo()->prepare($sql);
+        $stmt->execute(['id' => $hash]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['id'];
+    }
 }
