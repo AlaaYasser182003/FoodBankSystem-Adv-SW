@@ -129,48 +129,74 @@ class DonorView extends ViewAbst{
     }
 
     function ShowDonorDetails($donor) {
-        echo('<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Food Bank</title>
-            <link rel="stylesheet" href="../CSS/CRUD.css">
-        </head>
-        <body>
-            <style> body{background-color: #329443;}</style>
+        echo( '<html lang="en"><head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="..\CSS\myacc.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+                <title>Food Bank</title>
+            </head>
+            <body>
+                <header>
+                    <h1>Food Bank</h1>
+                    <nav>
+                        <ul>
+                            <li><a href="..\Controller\HomeController.php">Home</a></li>
+                            <a href="..\Controller\CartController.php?cmd=showcart" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>                           
+                        </ul>
+                    </nav>
+                </header>
+                
+                <main>
+                    <h2>My Account</h2>
+                    <form action="editDonor.php" method="post">
+                    <label>Username: </label>
+                    <input type="text" id="username" name="username" value="'.$donor->getUserName().'">
+                    <br><br>
             
-            <div class="container">
+                    <label>Birthdate: </label>
+                    <input type="date" id="birthdate" name="birthdate" value="'.$donor->getBirthdate().'">
+                    <br><br>
             
+                    <label>Email: </label>
+                    <input type="text" id="email" name="email" value="'.$donor->getEmail().'">
+                    <br><br>
             
-            <div class="admin-object-form-container centered">
-            <form action="" method="post">
-                <h3 class="title">My Account</h3>
-                <input type="date" min="0" class="box" name="birthdate" value="'.$donor->getBirthdate().'" placeholder="enter your birthdate" required>
-                <input type="text" min="0" class="box" name="email" value="'.$donor->getEmail().'" placeholder="enter your email" required>
-                <input type="text" min="0" class="box" name="phone" value="'.$donor->getPhoneNumber().'" placeholder="enter your phone number" required>
-                <div class="gender-option">
-                    <div class="gender">
-                        <br/><label for="check" class="box">Male</label>
-                        <input type="radio" id="male" name="gender" value="'.GenderEnum::Male->value.'" required ');
-                if ($donor->getGender() == GenderEnum::Male->value)
-                    echo(' checked');
-                echo('/></div> 
-                        <div class="gender">
-                            <br/><br/><label for="check" class="box">Female</label>
-                            <input type="radio" id="female" name="gender" value="'.GenderEnum::Female->value.'" required ');
-                if ($donor->getGender() == GenderEnum::Female->value)
-                    echo(' checked');
-                echo('/></div> 
-                </div>
-                <br/><input type="submit" value="Update" name="update_distributor" class="btn">
-                <a href="../Controller/HomeController.php" class="btn">Cancel</a>
-            </form>
-            </div>
-            </div>
-        </body>
-        </html>');
+                    <label>Phone Number: </label>
+                    <input type="text" id="phone" name="phone" value="'.$donor->getPhoneNumber().'">
+                    <br><br>
+                    
+                    <div class="gender-box">
+                        <div class="gender-option">
+                            <div class="gender">
+                            
+                                <label for="check" class="box">Male</label>
+                                <input type="radio" id="male" name="gender" value="'.GenderEnum::Male->value.'" required ');
+                                if ($donor->getGender() == GenderEnum::Male->value)
+                                    echo(' checked');
+                                echo('/></div> 
+                                        <div class="gender">
+                                            <br/><br/><label for="check" class="box">Female</label>
+                                            <input type="radio" id="female" name="gender" value="'.GenderEnum::Female->value.'" required ');
+                                if ($donor->getGender() == GenderEnum::Female->value)
+                                    echo(' checked');
+                                echo('/></div> 
+                        </div>
+                    </div>
+                    <br><br>
+            
+                    <input type="submit" value="Update">
+                    <br><br>
+                </form>
+                <p class="updatepass-link"><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=viewdonations">My Donations</a></p>
+                <p class="logout-link"><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></p>
+                </main>
+                <footer>
+                    <p>© 2024 Food Bank</p>
+                </footer>
+            </body>
+        </html>'
+    );
     }
     function ShowMyDD($rows, $obj) {
         $programModel = new ProgramModel();
@@ -191,8 +217,8 @@ class DonorView extends ViewAbst{
                 <h1>Donation Database</h1>
                 <nav>
                     <ul>
+                        <li><a href="..\Controller\HomeController.php">Home</a></li>
                         <li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=myacc">My Account</a></li>
-                        <li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=viewdonations">My Donations</a></li>
                         <li><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></li>
                         <a href="..\Controller\CartController.php?cmd=showcart" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                     </ul>
