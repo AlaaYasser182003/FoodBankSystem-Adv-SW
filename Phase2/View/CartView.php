@@ -66,10 +66,20 @@ class CartView extends ViewAbst {
                 <tr>
                     <td><a href="HomeController.php?" class="btn"> Back to Home </a></td>
                     <td><a href="CartController.php?cmd=removeall" class="btn"> Remove All </a></td>
-                    <td><a href="DonationController.php?cmd=add&cost='.$total.'" class="btn"> Donate Now </a></td>    
+                    <td><button class="btn" type="submit" form="a-form">Donate Now</button></td>
                 </tr>
-                <div class="message">Grand Total: '.$total.'</div>'
-            );
+                <div class="message">Grand Total: '.$total.'</div>
+            </table>
+            <form action="DonationController.php?cmd=add" id="a-form" method="post">
+                <br><label style="font-size: 20px">Increase My Impact</label>
+                <p style="font-size: 14px">
+                <input type="checkbox" id="tr_add" name="tr_add">
+                Add 5EGP to help cover our transaction fees.<br>
+                <input type="checkbox" id="other_add" name="other_add">
+                Add 10EGP to help cover other fees associated with the donation.</p>
+                <input type="hidden" id="cost" name="cost" value="'.$total.'">
+            </form>
+            ');
 
         }    
     }

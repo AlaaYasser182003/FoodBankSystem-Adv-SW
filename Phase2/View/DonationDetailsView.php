@@ -83,7 +83,7 @@ class DonationDetailsView extends ViewAbst {
             </header>
             <div class="container">
             <h2>Donor ID: '.DonorModel::getByHash($donation->getDonorId()).'</h2><br/>
-            <h2>Total Cost: '.$donation->getTotalCost().'</h2></br>
+            <h2>Total Cost: '.$donation->getTotalCost().'EGP</h2></br>
             <h2>Donation Date: '.$donation->getDonationDate().'</h2><br/>
         ');
         echo('
@@ -101,7 +101,7 @@ class DonationDetailsView extends ViewAbst {
                 <td>'.$row['id'].'</td>
                 <td>'.ItemModel::getByHash($row['item_id']).'</td>
                 <td>'.$row['Qty'].'</td>
-                <td>'.$row['Qty'] * $row['price'].'</td>
+                <td>'.$row['Qty'] * $row['price'].'EGP</td>
             </tr>
         ');
         }
