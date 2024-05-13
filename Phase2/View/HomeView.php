@@ -23,7 +23,6 @@ class HomeView extends ViewAbst {
         );
         if ($logged) {
             echo('<li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=myacc">My Account</a></li>');
-            echo('<li><a href="..\Controller\DonorController.php?id='.md5( $_SESSION['user_id']).'&cmd=viewdonations">My Donations</a></li>');
 
             echo('<li><a href="..\Controller\HomeController.php?cmd=logout">Logout</a></li>');
             echo('<a href="..\Controller\CartController.php?cmd=showcart" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>');
