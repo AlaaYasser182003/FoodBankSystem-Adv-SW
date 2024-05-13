@@ -33,7 +33,6 @@ class DonorController {
   }
   function view_donations() {
     require_once "../Model/DonationDetailsModel.php";
-    session_start();
 
     $donorId = md5($_SESSION['user_id']); 
     $donorModel = new DonorModel();
