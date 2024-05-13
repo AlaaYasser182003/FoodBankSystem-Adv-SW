@@ -33,6 +33,7 @@ class DonationModel extends ModifiableAbstModel {
        
         $lastInsertedId = Singleton::getpdo()->lastInsertId();
 
+        $this->id = md5($lastInsertedId);
         $md5Hash = md5($lastInsertedId);
         
         $sql = "UPDATE ".self::table." SET donationid = :md5Hash WHERE id = :lastInsertedId";
@@ -41,16 +42,16 @@ class DonationModel extends ModifiableAbstModel {
             ':md5Hash' => $md5Hash,
             ':lastInsertedId' => $lastInsertedId
         ));
-       
     }
 
-public static function getDonationId($donor_id, $donation_date) {
+public static function getDonationId($donor_id, $total_cost, $donation_date) {
     
     
-    $sql = "SELECT donationid FROM ".self::table." WHERE donor_id = :donor_id AND donation_date = :donation_date";
+    $sql = "SELECT donationid FROM ".self::table." WHERE donor_id = :donor_id AND total_cost = :total_cost AND donation_date = :donation_date";
     $stmt = Singleton::getpdo()->prepare($sql);
     $stmt->execute([
         'donor_id' => $donor_id,
+        'total_cost' => $total_cost,
         'donation_date' => $donation_date
     ]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
