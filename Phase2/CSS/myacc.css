@@ -90,6 +90,22 @@ form input[type="date"] {
     border-radius: 5px;
 }
 
+form input[type="number"] {
+    width: 20%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form select[name = "item"]{
+    width: 20%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 form input[type="submit"] {
     background-color: #329443;
     color: #fff;
@@ -120,5 +136,22 @@ form input[type="submit"]:hover {
 .updatepass-link a:hover,
 .logout-link a:hover {
     text-decoration: underline;
+}
+
+.form .gender{
+    column-gap: 5px;
+    cursor: pointer;
+}
+
+.gender input{
+    accent-color: #329443;
+}
+
+.form :where(.gender input, .gender label){
+    cursor: pointer;
+}
+
+.gender label{
+    color: #707070;
 }
 
