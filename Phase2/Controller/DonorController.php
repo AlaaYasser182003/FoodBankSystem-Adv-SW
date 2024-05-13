@@ -71,6 +71,7 @@ class DonorController {
 $command = $_GET['cmd'];
 $id = $_GET['id'];
 $controller = new DonorController();
+session_start();
 
 if ($command == 'signup') {
   $controller->signup();
