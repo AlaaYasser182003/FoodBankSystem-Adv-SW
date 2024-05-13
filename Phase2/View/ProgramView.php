@@ -116,8 +116,10 @@ class ProgramView extends ViewAbst {
         session_start();
         echo('<html lang="en"><head>
                 <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="..\CSS\index.css">
+                <link rel="stylesheet" href="..\CSS\myacc.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
                 <title>Food Bank</title>
             </head>
             <body>
@@ -127,12 +129,14 @@ class ProgramView extends ViewAbst {
                         <ul>
                             <li><a href="..\Controller\HomeController.php">Home</a></li>
                             <li><a href="..\Controller\DonorController.php?id='. md5($_SESSION['user_id']).'&cmd=myacc">My Account</a></li>
+                            <li><a href="..\Controller\CartController.php?cmd=showcart" class="cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
                         </ul>
                     </nav>
                 </header>
                 
                 <main>
-                    '.$program->getProgramName().'<br>'.$program->getProgramDescription().'
+                    <h1>'.$program->getProgramName().'</h1><br><br>
+                    <h2>'.$program->getProgramDescription().'<h2>
                     <form action="CartController.php?cmd=addToCart&id='.$_GET['id'].'" method="post">
                     <label for="item"> Choose item: </label>
                     <select name = "item">');
@@ -145,14 +149,14 @@ class ProgramView extends ViewAbst {
         }            
               echo('     
                 </select> 
+                <label></label>
                 <label>Amount: </label>
-                <input type="number" id="quantity" name="quantity" required> 
+                <input type="number" id="quantity" name="quantity" value=0 required> 
                 <br><br>
                 <input type="hidden" name="program_name" value="'.$program->getProgramName().'">
                 <input type="hidden" name="program_id" value="'.md5($program->getId()).'">
                 <input type="submit" value="Add to Cart">
                 </form>
-                <p class="Checkout-link"><a href="..\Controller\CartController.php?cmd=showcart">Donate</a></p>
                 <p class="Cancel-link"><a href="..\Controller\HomeController.php">Cancel</a></p>
                 </main>
                 <footer>
