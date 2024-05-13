@@ -22,7 +22,7 @@ class CartView extends ViewAbst {
                     <h1>My Cart</h1>
                     <nav>
                         <ul>
-                            <li><a href="../Controller/HomeController.php">Back</a></li>
+                            <li><a href="..\Controller\HomeController.php">Home</a></li>
                         </ul>
                     </nav>
             </header>');
