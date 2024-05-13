@@ -151,7 +151,7 @@ class ProgramView extends ViewAbst {
                 </select> 
                 <label></label>
                 <label>Amount: </label>
-                <input type="number" id="quantity" name="quantity" value=0 required> 
+                <input type="number" id="quantity" min="0" name="quantity" value=0 required> 
                 <br><br>
                 <input type="hidden" name="program_name" value="'.$program->getProgramName().'">
                 <input type="hidden" name="program_id" value="'.md5($program->getId()).'">

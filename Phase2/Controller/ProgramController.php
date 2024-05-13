@@ -13,7 +13,10 @@ class ProgramController {
         $this->ProgView->ChangeProgram($ProgModel->add());
     }
     public function deleteController() {
-        $this->ProgView->ChangeProgram(ProgramModel::remove($_GET['id']));
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->ProgView->ChangeProgram(ProgramModel::remove($_POST['id']));
+        }
+        else $this->ProgView->deleteRow();
     }
     public function view_allController() {
         $stmt = ProgramModel::view_all();

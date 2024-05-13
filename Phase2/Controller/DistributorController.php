@@ -12,7 +12,10 @@ class DistributorController {
         $this->distView->ChangeDistributor($distModel->add());
 }
     public function deleteController() {
-        $this->distView->ChangeDistributor(DistributorModel::remove($_GET['id']));
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->distView->ChangeDistributor(DistributorModel::remove($_POST['id']));
+        }
+        else $this->distView->deleteRow();
 }
     public function view_allController() {
         $stmt = DistributorModel::view_all();

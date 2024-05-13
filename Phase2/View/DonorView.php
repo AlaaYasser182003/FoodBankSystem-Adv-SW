@@ -149,9 +149,9 @@ class DonorView extends ViewAbst{
                 
                 <main>
                     <h2>My Account</h2>
-                    <form action="editDonor.php" method="post">
+                    <form action="../Controller/DonorController.php?cmd=myacc" method="post">
                     <label>Username: </label>
-                    <input type="text" id="username" name="username" value="'.$donor->getUserName().'">
+                    <input type="text" id="username" name="username" value="'.$donor->getUserName().'" readonly>
                     <br><br>
             
                     <label>Birthdate: </label>

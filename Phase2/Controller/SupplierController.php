@@ -12,7 +12,10 @@ class SupplierController {
         $this->suppView->ChangeSupplier($suppModel->add());
     }
     public function deleteController() {
-        $this->suppView->ChangeSupplier(SupplierModel::remove($_GET['id']));
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->suppView->ChangeSupplier(SupplierModel::remove($_POST['id']));        
+        }
+        else $this->suppView->deleteRow();
     }
     public function view_allController() {
         $stmt = SupplierModel::view_all();

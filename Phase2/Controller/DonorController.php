@@ -15,7 +15,7 @@ class DonorController {
       {
       session_start();
       $donorModel = new DonorModel($_SESSION['user_id'], $_POST['birthdate'],
-        $_POST['email'], "", $_POST['phone'], $_POST['gender']);   // 
+        $_POST['email'], "", $_POST['phone'], $_POST['gender']);
       $donorModel->setId(md5($_SESSION['user_id']));
       $donorModel->edit();
       header("Location: HomeController.php");
@@ -69,7 +69,12 @@ class DonorController {
 }
 
 $command = $_GET['cmd'];
-$id = $_GET['id'];
+
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+}
+else $id = 0;
+
 $controller = new DonorController();
 session_start();
 

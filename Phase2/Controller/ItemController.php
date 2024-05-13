@@ -12,7 +12,10 @@ class ItemController {
         $this->itemView->ChangeItem($itemModel->add()); 
 }
     public function deleteController() {
-        $this->itemView->ChangeItem(ItemModel::remove($_GET['id']));
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->itemView->ChangeItem(ItemModel::remove($_POST['id']));        
+        }
+        else $this->itemView->deleteRow();
     }
     public function view_allController() {
         $stmt = ItemModel::view_all();
