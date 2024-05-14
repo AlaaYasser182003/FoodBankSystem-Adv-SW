@@ -159,7 +159,7 @@ class DonorView extends ViewAbst{
                     <br><br>
             
                     <label>Email: </label>
-                    <input type="text" id="email" name="email" value="'.$donor->getEmail().'">
+                    <input type="email" id="email" name="email" value="'.$donor->getEmail().'">
                     <br><br>
             
                     <label>Phone Number: </label>
@@ -258,7 +258,6 @@ class DonorView extends ViewAbst{
     }
 }
 
-        
     
 
    
