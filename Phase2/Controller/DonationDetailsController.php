@@ -15,7 +15,10 @@ class DonationDetailsController {
         }
         $_SESSION['cart'] = array(); //to empty the cart after the donation
         $donationDetailsView = new DonationDetailsView();
-        $donationDetailsView->ShowReciept($donationkey,DonationDetailsModel::view_all_id($donationkey));
+        $donationmodel = new DonationModel();
+        $donationmodel->getById($donationkey);
+        $total = $donationmodel->getTotalCost();
+        $donationDetailsView->ShowReciept($donationkey,DonationDetailsModel::view_all_id($donationkey),$total);
     }
 
     function viewController($donationkey) {
@@ -28,6 +31,7 @@ class DonationDetailsController {
 $controller = new DonationDetailsController();
 $command = $_GET['cmd'];
 $donationkey = $_GET['id'];
+
 
 if ($command == 'viewDetails') {
     $controller->viewController($donationkey, );
