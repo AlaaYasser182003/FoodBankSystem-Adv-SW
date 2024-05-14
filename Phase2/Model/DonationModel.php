@@ -11,7 +11,7 @@ class DonationModel extends ModifiableAbstModel {
     private $donation_date;
     private $receipt;
 
-    public function __construct($donor_id = "", $total_cost = 0, $donation_date = "") {
+    public function __construct($donor_id = "", $total_cost=0, $donation_date = "") {
         $this->donor_id = $donor_id;
         $this->total_cost = $total_cost;
         $this->donation_date = $donation_date;
