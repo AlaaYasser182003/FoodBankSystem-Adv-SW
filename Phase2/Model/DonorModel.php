@@ -87,22 +87,20 @@ class DonorModel extends ModifiableAbstModel implements IVerifiable {
         $stmt = Singleton::getpdo()->query("SELECT * FROM ".self::table);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-/*
-    public function Checkemail($email){
 
-         $sql = "SELECT COUNT(*) AS num_rows FROM".self::table."WHERE email = :email";
-         $stmt = Singleton::getpdo()->prepare($sql);
-         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-         $stmt->execute(); // Execute the prepared statement
-         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-         if($result !== false){
- 
-         return true;
-         }
-         else return false;
-
-    }*/
+    public function exists($email){
+        $sql = "SELECT COUNT(id) AS num_rows FROM ".self::table." WHERE email = :email";
+        $stmt = Singleton::getpdo()->prepare($sql);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute(); 
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result['num_rows'] > 0) {
+            return true; // Email exists
+        } else {
+            return false; // Email does not exist
+        }
+    }
     static function login($Username, $Password){
 
         try {
