@@ -8,7 +8,10 @@ class DonorController {
     $this->donorView = new DonorView();
   }
   function signup() {
-    $this->donorView->signup();
+    $error = isset($_SESSION['signup_error']) ? $_SESSION['signup_error'] : null;
+    $this->donorView->signup($error);
+    unset($_SESSION['signup_error']); 
+   
   }
   function myaccount($id) {
     if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -49,22 +52,20 @@ class DonorController {
     $phone = trim($_POST['phone']);
     $birthdate = trim($_POST['birthdate']);
     $gender = trim($_POST['gender']);
-  
-    $donor = new DonorModel($username,$birthdate,$email, $password,  $phone, $gender);  
-    $donor->add();
-  
-    header("Location: ../Controller/HomeController.php?cmd=login");
-  
-    // $exists = $donorModel->checkemail($email);
-    /* if($exists){
-        $error = 'Account Already exists';
-        $donorView->signup($error);
-  
+
+   $donormodel =new DonorModel();
+   //$donorview = new DonorView();
+    if($donormodel->exists($email)){
+
+      $_SESSION['signup_error'] = 'Email already exists';
+      header("Location: ../Controller/DonorController.php?cmd=signup");
+      exit();
     }
-    else {
-    $donor = new DonorModel($username,$birthdate,$email, $password,  $phone, $gender);
-    $donor->add();
-    } */
+    else{
+      $donor = new DonorModel($username,$birthdate,$email, $password,  $phone, $gender);  
+      $donor->add();
+    
+      header("Location: ../Controller/HomeController.php?cmd=login");}
   }
 }
 
