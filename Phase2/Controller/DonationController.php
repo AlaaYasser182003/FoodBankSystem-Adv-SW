@@ -1,6 +1,9 @@
 <?php
 require_once "../Model/DonationModel.php";
 require_once "../View/DonationView.php";
+require_once "../Model/DP_Donation.php";
+require_once "../Model/DecOther.php";
+require_once "../Model/DecTrans.php";
 
 
 class DonationController {

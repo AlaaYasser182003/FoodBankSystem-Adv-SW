@@ -74,12 +74,6 @@ class CartView extends ViewAbst {
             </table>
 
             <form action="..\Controller\PaymentController.php?cmd=paymentoptions" method="post">
-               
-                
-               
-                
-            
-            
                 <br><label style="font-size: 20px">Increase My Impact</label>
                 <p style="font-size: 14px">
                 <input type="checkbox" id="tr_add" name="tr_add">

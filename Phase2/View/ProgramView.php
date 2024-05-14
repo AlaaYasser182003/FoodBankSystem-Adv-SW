@@ -166,6 +166,7 @@ class ProgramView extends ViewAbst {
         </html>');
     }
     
+
     function deleteRow() {
         echo('
         <!DOCTYPE html>
