@@ -2,6 +2,7 @@
 require_once "../Model/DonationModel.php";
 require_once "../View/DonationView.php";
 
+
 class DonationController {
     function view_allController() {
         $donationView = new DonationsView();
@@ -11,10 +12,11 @@ class DonationController {
 
     function addController() {
         session_start();
-        $donationModel = new DonationModel(md5($_SESSION['user_id']), $_GET['cost'], date('y-m-d'));
+        $cost = $_POST['cost'];
+        $donationModel = new DonationModel(md5($_SESSION['user_id']), $cost, date('y-m-d'));
         $donationModel->add(); 
     
-         $donationid = $donationModel->getDonationId(md5($_SESSION['user_id']), $_GET['cost'],date('y-m-d'));
+         $donationid = $donationModel->getDonationId(md5($_SESSION['user_id']), $cost, date('y-m-d'));
         
         header("Location: DonationDetailsController.php?cmd=add&id=".$donationid); 
         return;    
@@ -23,6 +25,9 @@ class DonationController {
 
 $dController = new DonationController();
 $command = $_GET['cmd'];
+
+
+
 
 if ($command == 'viewAll') {
     $dController->view_allController();
