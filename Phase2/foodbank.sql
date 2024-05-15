@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2024 at 11:55 PM
+-- Generation Time: May 15, 2024 at 04:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -132,20 +132,21 @@ CREATE TABLE `item` (
   `item_cost` float UNSIGNED DEFAULT NULL,
   `amount` mediumint(128) UNSIGNED DEFAULT NULL,
   `program_id` varchar(222) DEFAULT NULL,
-  `itemid` varchar(222) DEFAULT NULL
+  `itemid` varchar(222) DEFAULT NULL,
+  `program_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`id`, `item_name`, `item_cost`, `amount`, `program_id`, `itemid`) VALUES
-(1, 'Monthly Carton', 500, 600, 'c4ca4238a0b923820dcc509a6f75849b', 'c4ca4238a0b923820dcc509a6f75849b'),
-(2, 'Orphan meal', 100, 2000, 'c81e728d9d4c2f636f067f89cc14862c', 'c81e728d9d4c2f636f067f89cc14862c'),
-(3, 'Gaza family box', 500, 1080, 'e4da3b7fbbce2345d7772b0674a318d5', 'eccbc87e4b5ce2fe28308fd9f2a7baf3'),
-(4, 'kafara meal', 65, 1000, 'a87ff679a2f3e71d9181a67b7542122c', 'a87ff679a2f3e71d9181a67b7542122c'),
-(5, 'Sheep', 8500, 200, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'e4da3b7fbbce2345d7772b0674a318d5'),
-(6, 'Calf', 20000, 170, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', '1679091c5a880faf6fb5e6087eb1b2dc');
+INSERT INTO `item` (`id`, `item_name`, `item_cost`, `amount`, `program_id`, `itemid`, `program_name`) VALUES
+(1, 'Monthly Carton', 500, 600, 'c4ca4238a0b923820dcc509a6f75849b', 'c4ca4238a0b923820dcc509a6f75849b', 'Feed a Family'),
+(2, 'Orphan meal', 100, 2000, 'c81e728d9d4c2f636f067f89cc14862c', 'c81e728d9d4c2f636f067f89cc14862c', 'Feed an Orphan'),
+(3, 'Gaza family box', 500, 1080, 'e4da3b7fbbce2345d7772b0674a318d5', 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'Help for Gaza'),
+(4, 'kafara meal', 65, 1000, 'a87ff679a2f3e71d9181a67b7542122c', 'a87ff679a2f3e71d9181a67b7542122c', 'Al-Kafara'),
+(5, 'Sheep', 8500, 200, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', 'e4da3b7fbbce2345d7772b0674a318d5', 'Fido and Aqeeqah'),
+(6, 'Calf', 20000, 170, 'eccbc87e4b5ce2fe28308fd9f2a7baf3', '1679091c5a880faf6fb5e6087eb1b2dc', 'Fido and Aqeeqah');
 
 -- --------------------------------------------------------
 
