@@ -34,7 +34,7 @@ class ItemView extends ViewAbst{
          <h3>add a new item</h3>
          <input type="text" placeholder="enter item name" name="item_name" class="box" required>
          <input type="number" placeholder="enter item amount" min="0" name="amount" class="box" required>
-         <input type="number" step="0.001" min="0" placeholder="enter item cost" name="item_cost" class="box" required>
+         <input type="number" step="0.001" min="0" max="9999" placeholder="enter item cost" name="item_cost" class="box" required>
          <input type="number" placeholder="enter program id" name="program_id" class="box" required>
          <input type="submit" class="btn" name="add_item" value="Create">
       </form>

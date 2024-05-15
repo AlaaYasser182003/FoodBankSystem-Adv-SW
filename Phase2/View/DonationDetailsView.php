@@ -101,7 +101,7 @@ class DonationDetailsView extends ViewAbst {
                 <td>'.$row['id'].'</td>
                 <td>'.ItemModel::getByHash($row['item_id']).'</td>
                 <td>'.$row['Qty'].'</td>
-                <td>'.$total.'EGP</td>
+                <td>'.$row['price'] * $row['Qty'].'EGP</td>
             </tr>
         ');
         }
