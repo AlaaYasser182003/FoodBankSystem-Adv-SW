@@ -10,11 +10,19 @@ class ProgramController {
     }
     public function addController() {
         $ProgModel = new ProgramModel(trim($_POST['name']), trim($_POST['address']));
-        $this->ProgView->ChangeProgram($ProgModel->add());
+       $this->ProgView->ChangeProgram($ProgModel->add());
     }
     public function deleteController() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            try{
             $this->ProgView->ChangeProgram(ProgramModel::remove($_POST['id']));
+            }catch(PDOException $e){
+                if ($e->getCode() == '23000') {
+                    $this->ProgView->ChangeProgram(0);
+                } else {
+                    echo "Error: " . $e->getMessage();
+                }
+            }
         }
         else $this->ProgView->deleteRow();
     }
@@ -25,8 +33,13 @@ class ProgramController {
 
     public function editController() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $ProgModel = new ProgramModel(trim($_POST['name']), trim($_POST['address']));
+            $ProgModel = new ProgramModel(trim($_POST['name']), trim($_POST['address']), $_GET['id']);
             $ProgModel->setId($_GET['id']);
+            /*foreach ($ProgModel->observers as $observer) {
+                if ($observer instanceof ItemModel) {
+                    echo "Item ID: " . $observer->getItemName() . "\n";
+                }
+            }*/
             $this->ProgView->ChangeProgram($ProgModel->edit());
         }
         else {
