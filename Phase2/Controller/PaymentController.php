@@ -1,7 +1,8 @@
 <?php
 
-require_once "../Model/FawryPay.php";
 require_once "../Model/VisaPay.php";
+require_once "../Model/FawryPay.php";
+require_once "../Model/Payment.php";
 require_once "../View/PaymentView.php";
 require_once "../Model/DP_Donation.php";
 require_once "../Model/DecOther.php";
@@ -46,18 +47,20 @@ class PaymentController {
         
         switch($paymentMethod) {
             case 'Fawry':
-                $FawryPayment= new FawryPay();
-                $result=$FawryPayment->pay($amount);
-
+                $payment = new Payment();
+                $payment->setPayMethod(new FawryPay());
+                $result =$payment->makepayment($amount);
+            
                 if($result ){
-               // header("Location: DonationController.php?cmd=add&cost=".$amount);
                  $this->payview->PaymentResult($result, $paymentMethod,$amount);
                 
                 }
                break;
             case 'Visa':
-                $VisaPayment= new VisaPay();
-                $result =$VisaPayment->pay($amount);
+                $payment = new Payment();
+                $payment->setPayMethod(new VisaPay());
+                $result =$payment->makepayment($amount);
+                
                 if($result){
                     $this->payview->PaymentResult($result, $paymentMethod,$amount);
                     }
