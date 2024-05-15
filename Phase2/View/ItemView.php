@@ -47,6 +47,7 @@ class ItemView extends ViewAbst{
          <tr>
             <th>item ID</th>
             <th>program ID</th>
+            <th>program name</th>
             <th>item name</th>
             <th>item cost</th>
             <th>item amount</th>
@@ -59,6 +60,7 @@ class ItemView extends ViewAbst{
          echo('<tr>
          <td>'.$row['id'].'</td>
          <td>'.ProgramModel::getByHash($row['program_id']).'</td>
+         <td>'.$row['program_name'].'</td>
          <td>'.$row['item_name'].'</td>
          <td>'.$row['item_cost']."EGP".'</td>
          <td>'.$row['amount'].'</td>
