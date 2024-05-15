@@ -197,7 +197,7 @@ class ProgramView extends ViewAbst {
                                         <p>Are you sure you want to delete this record?</p><br>
                                         <p>
                                             <input type="submit" value="Yes" class="btn btn-danger">
-                                            <a href="../Controller/ProgramrController.php?cmd=viewAll" class="btn btn-default">No</a>
+                                            <a href="../Controller/ProgramController.php?cmd=viewAll" class="btn btn-default">No</a>
                                         </p>
                                     </div>
                                 </form>
